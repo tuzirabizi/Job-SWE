@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Crimble - Find Your Dream Career</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f8f9fa;
+      color: #333;
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    
+    /* Navbar */
+    .navbar {
+      background-color: #2e7d32;
+      color: white;
+      padding: 16px 0;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    
+    .navbar-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+      transition: transform 0.3s ease;
+    }
+    
+    .logo:hover {
+      transform: scale(1.05);
+    }
+    
+    .nav-links {
+      display: flex;
+      gap: 20px;
+    }
+    
+    .nav-links a {
+      color: white;
+      text-decoration: none;
+      position: relative;
+      padding: 5px 0;
+    }
+    
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: 0;
+      left: 0;
+      background-color: white;
+      transition: width 0.3s ease;
+    }
+    
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+    
+    .auth-buttons {
+      display: flex;
+      gap: 10px;
+    }
+    
+    .btn {
+      padding: 10px 20px;
+      border-radius: 4px;
+      cursor: pointer;
+      border: none;
+      font-weight: 500;
+      font-size: 14px;
+      text-transform: uppercase;
+      transition: all 0.3s ease;
+    }
+    
+    .btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    
+    .btn-primary {
+      background-color: #43a047;
+      color: white;
+    }
+    
+    .btn-primary:hover {
+      background-color: #2e7d32;
+    }
+    
+    .btn-outline {
+      background-color: transparent;
+      color: white;
+      border: 1px solid white;
+    }
+    
+    .btn-outline:hover {
+      background-color: rgba(255,255,255,0.1);
+    }
+    
+    /* Hero Section */
+    .hero {
+      background: linear-gradient(135deg, #2e7d32 0%, #43a047 100%);
+      color: white;
+      padding: 80px 0;
+      text-align: center;
+    }
+    
+    .hero-content {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    
+    .hero h1 {
+      font-size: 48px;
+      margin-bottom: 20px;
+      animation: fadeInUp 1s ease;
+    }
+    
+    .hero p {
+      font-size: 20px;
+      margin-bottom: 30px;
+      opacity: 0.9;
+      animation: fadeInUp 1.2s ease;
+    }
+    
+    .hero-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      margin-top: 40px;
+      animation: fadeInUp 1.4s ease;
+    }
+    
+    .btn-large {
+      padding: 12px 30px;
+      font-size: 16px;
+    }
+    
+    /* Stats Section */
+    .stats {
+      padding: 80px 0;
+      background-color: white;
+    }
+    
+    .stats-title {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+    
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 30px;
+      text-align: center;
+    }
+    
+    .stat-item {
+      padding: 20px;
+      border-radius: 8px;
+      background-color: #f8f9fa;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .stat-item:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    }
+    
+    .stat-number {
+      font-size: 48px;
+      font-weight: bold;
+      color: #2e7d32;
+      margin-bottom: 10px;
+    }
+    
+    .stat-label {
+      font-size: 18px;
+      color: #666;
+    }
+    
+    /* Features Section */
+    .features {
+      padding: 80px 0;
+      background-color: #f8f9fa;
+    }
+    
+    .features-title {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+    
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+    }
+    
+    .feature-item {
+      background-color: white;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      transition: transform 0.3s ease;
+    }
+    
+    .feature-item:hover {
+      transform: translateY(-10px);
+    }
+    
+    .feature-image {
+      height: 200px;
+      background-size: cover;
+      background-position: center;
+    }
+    
+    .feature-content {
+      padding: 20px;
+    }
+    
+    .feature-title {
+      font-size: 20px;
+      font-weight: 500;
+      margin-bottom: 10px;
+      color: #2e7d32;
+    }
+    
+    .feature-description {
+      color: #666;
+      margin-bottom: 15px;
+    }
+    
+    /* Courses Section */
+    .courses {
+      padding: 80px 0;
+      background-color: white;
+    }
+    
+    .courses-title {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+    
+    .courses-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+    }
+    
+    .course-item {
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .course-item:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+    }
+    
+    .course-image {
+      height: 200px;
+      background-size: cover;
+      background-position: center;
+      position: relative;
+    }
+    
+    .course-tag {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background-color: #43a047;
+      color: white;
+      padding: 5px 10px;
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: 500;
+    }
+    
+    .course-content {
+      padding: 20px;
+    }
+    
+    .course-title {
+      font-size: 20px;
+      font-weight: 500;
+      margin-bottom: 10px;
+      color: #2e7d32;
+    }
+    
+    .course-instructor {
+      font-size: 14px;
+      color: #666;
+      margin-bottom: 15px;
+    }
+    
+    .course-stats {
+      display: flex;
+      justify-content: space-between;
+      color: #666;
+      font-size: 14px;
+    }
+    
+    /* CTA Section */
+    .cta {
+      padding: 80px 0;
+      background: linear-gradient(135deg, #2e7d32 0%, #43a047 100%);
+      color: white;
+      text-align: center;
+    }
+    
+    .cta-content {
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    
+    .cta h2 {
+      font-size: 36px;
+      margin-bottom: 20px;
+    }
+    
+    .cta p {
+      margin-bottom: 30px;
+      opacity: 0.9;
+    }
+    
+    /* Footer */
+    .footer {
+      background-color: #1b5e20;
+      color: white;
+      padding: 40px 0 20px;
+    }
+    
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 30px;
+      margin-bottom: 30px;
+    }
+    
+    .footer-section h3 {
+      margin-top: 0;
+      margin-bottom: 16px;
+      font-size: 18px;
+    }
+    
+    .footer-links {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    
+    .footer-links li {
+      margin-bottom: 10px;
+    }
+    
+    .footer-links a {
+      color: #a5d6a7;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    
+    .footer-links a:hover {
+      color: white;
+    }
+    
+    .copyright {
+      text-align: center;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      color: #a5d6a7;
+      font-size: 14px;
+    }
+    
+    /* Animations */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <div class="navbar">
+    <div class="container navbar-container">
+      <div class="logo">Crimble</div>
+      <div class="nav-links">
+        <a href="#">Home</a>
+        <a href="#">Jobs</a>
+        <a href="#">Courses</a>
+        <a href="#">Resources</a>
+        <a href="#">Pricing</a>
+      </div>
+      <div class="auth-buttons">
+        <button class="btn btn-outline">Login</button>
+        <button class="btn btn-primary">Register</button>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Hero Section -->
+  <div class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <h1>Elevate Your Career Journey</h1>
+        <p>Find the perfect job, master in-demand skills, and connect with top employers. Your next career milestone starts here.</p>
+        <div class="hero-buttons">
+          <button class="btn btn-primary btn-large">Explore Jobs</button>
+          <button class="btn btn-outline btn-large">Browse Courses</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Stats Section -->
+  <div class="stats">
+    <div class="container">
+      <div class="stats-title">
+        <h2>Making an Impact</h2>
+        <p>Join thousands of professionals transforming their careers with Crimble</p>
+      </div>
+      <div class="stats-grid">
+        <div class="stat-item">
+          <div class="stat-number">10K+</div>
+          <div class="stat-label">Job Opportunities</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">5M+</div>
+          <div class="stat-label">Users Worldwide</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">200+</div>
+          <div class="stat-label">Expert Courses</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">92%</div>
+          <div class="stat-label">Success Rate</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Features Section -->
+  <div class="features">
+    <div class="container">
+      <div class="features-title">
+        <h2>Why Choose Crimble</h2>
+        <p>Comprehensive tools and resources to supercharge your career</p>
+      </div>
+      <div class="features-grid">
+        <div class="feature-item">
+          <div class="feature-image" style="background-image: url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80');"></div>
+          <div class="feature-content">
+            <h3 class="feature-title">AI-Powered Job Matching</h3>
+            <p class="feature-description">Our intelligent algorithm finds the perfect opportunities that match your skills and career goals.</p>
+            <button class="btn btn-primary">Learn More</button>
+          </div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-image" style="background-image: url('https://images.unsplash.com/photo-1434030216411-0b793f4b4173?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80');"></div>
+          <div class="feature-content">
+            <h3 class="feature-title">Expert-Led Skill Development</h3>
+            <p class="feature-description">Access high-quality courses taught by industry professionals to enhance your skillset.</p>
+            <button class="btn btn-primary">Learn More</button>
+          </div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-image" style="background-image: url('https://images.unsplash.com/photo-1552581234-26160f608093?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80');"></div>
+          <div class="feature-content">
+            <h3 class="feature-title">Career Coaching</h3>
+            <p class="feature-description">Personalized guidance and mentorship to help you navigate your career path effectively.</p>
+            <button class="btn btn-primary">Learn More</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Trendy Courses Section -->
+  <div class="courses">
+    <div class="container">
+      <div class="courses-title">
+        <h2>Trending Courses</h2>
+        <p>Boost your employability with in-demand skills</p>
+      </div>
+      <div class="courses-grid">
+        <div class="course-item">
+          <div class="course-image" style="background-image: url('https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1172&q=80');">
+            <div class="course-tag">Bestseller</div>
+          </div>
+          <div class="course-content">
+            <h3 class="course-title">Full Stack Web Development</h3>
+            <p class="course-instructor">By Sarah Johnson</p>
+            <div class="course-stats">
+              <span>42 Hours</span>
+              <span>4.9 ★★★★★ (2.4k)</span>
+            </div>
+          </div>
+        </div>
+        <div class="course-item">
+          <div class="course-image" style="background-image: url('https://images.unsplash.com/photo-1580894732930-0babd100d356?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80');">
+            <div class="course-tag">Hot</div>
+          </div>
+          <div class="course-content">
+            <h3 class="course-title">Data Science & AI Fundamentals</h3>
+            <p class="course-instructor">By Michael Chen</p>
+            <div class="course-stats">
+              <span>38 Hours</span>
+              <span>4.8 ★★★★★ (1.8k)</span>
+            </div>
+          </div>
+        </div>
+        <div class="course-item">
+          <div class="course-image" style="background-image: url('https://images.unsplash.com/photo-1661956602868-6ae368943878?ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80');">
+            <div class="course-tag">New</div>
+          </div>
+          <div class="course-content">
+            <h3 class="course-title">Product Management Mastery</h3>
+            <p class="course-instructor">By Lisa Thompson</p>
+            <div class="course-stats">
+              <span>28 Hours</span>
+              <span>4.7 ★★★★★ (956)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- CTA Section -->
+  <div class="cta">
+    <div class="container">
+      <div class="cta-content">
+        <h2>Ready to Transform Your Career?</h2>
+        <p>Join thousands of professionals who have already taken the next step in their career journey with Crimble.</p>
+        <button class="btn btn-outline btn-large">Get Started Today</button>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Footer -->
+  <div class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-section">
+          <h3>Company</h3>
+          <ul class="footer-links">
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Careers</a></li>
+            <li><a href="#">Press</a></li>
+            <li><a href="#">Blog</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-section">
+          <h3>Resources</h3>
+          <ul class="footer-links">
+            <li><a href="#">Career Guide</a></li>
+            <li><a href="#">Resume Builder</a></li>
+            <li><a href="#">Interview Prep</a></li>
+            <li><a href="#">Salary Calculator</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-section">
+          <h3>For Employers</h3>
+          <ul class="footer-links">
+            <li><a href="#">Post a Job</a></li>
+            <li><a href="#">Talent Solutions</a></li>
+            <li><a href="#">Pricing</a></li>
+            <li><a href="#">Enterprise</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-section">
+          <h3>For Job Seekers</h3>
+          <ul class="footer-links">
+            <li><a href="#">Browse Jobs</a></li>
+            <li><a href="#">Learning Paths</a></li>
+            <li><a href="#">Career Coaching</a></li>
+            <li><a href="#">Community</a></li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="copyright">
+        &copy; 2023 Crimble. All rights reserved.
+      </div>
+    </div>
+  </div>
+</body>
+</html> 
