@@ -1863,6 +1863,7 @@
             margin-bottom: 50px;
         }
         
+        /* Simplified Talent Card Styles */
         .talent-market-card {
             background-color: white;
             border-radius: 12px;
@@ -1872,6 +1873,7 @@
             display: flex;
             flex-direction: column;
             border: 1px solid #eee;
+            height: 420px; /* Fixed height for consistency */
         }
         
         .talent-market-card:hover {
@@ -2111,36 +2113,91 @@
             gap: 15px;
         }
         
-        .btn-view-profile, .btn-hire-now {
-            flex: 1;
-            text-align: center;
-            padding: 12px 0;
-            border-radius: 6px;
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s ease;
-        }
-        
+        /* Enhanced View Profile Button */
         .btn-view-profile {
-            background-color: transparent;
-            color: #000;
-            border: 1px solid #000;
+            display: block;
+            width: 100%;
+            padding: 12px 0;
+            background-color: #000;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-weight: 500;
+            font-size: 16px;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            margin-bottom: 10px;
         }
         
         .btn-view-profile:hover {
-            background-color: rgba(0,0,0,0.05);
-            transform: translateY(-3px);
-        }
-        
-        .btn-hire-now {
-            background-color: #000;
-            color: white;
-        }
-        
-        .btn-hire-now:hover {
             background-color: #333;
             transform: translateY(-3px);
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        /* Book Appointment Button */
+        .btn-book-appointment {
+            display: block;
+            width: 100%;
+            padding: 12px 0;
+            background-color: transparent;
+            color: #000;
+            border: 1px solid #000;
+            border-radius: 6px;
+            font-weight: 500;
+            font-size: 16px;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .btn-book-appointment:hover {
+            background-color: rgba(0,0,0,0.05);
+            transform: translateY(-3px);
+        }
+
+        /* Appointment Platform Menu */
+        .appointment-platform-menu {
+            display: none;
+            position: absolute;
+            top: calc(100% + 10px);
+            left: 0;
+            right: 0;
+            background-color: white;
+            border-radius: 6px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            z-index: 100;
+            padding: 10px;
+        }
+        
+        .appointment-option {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px;
+            text-decoration: none;
+            color: #333;
+            transition: all 0.3s ease;
+            border-radius: 4px;
+        }
+        
+        .appointment-option:hover {
+            background-color: #f5f5f5;
+        }
+        
+        .appointment-option img {
+            width: 20px;
+            height: 20px;
+        }
+        
+        .btn-book-appointment:focus + .appointment-platform-menu,
+        .btn-book-appointment:hover + .appointment-platform-menu,
+        .appointment-platform-menu:hover {
+            display: block;
         }
         
         .talent-marketplace-more {
@@ -2432,8 +2489,24 @@
                         </div>
                     </div>
                     <div class="talent-market-actions">
-                        <a href="#" class="btn-view-profile">View Profile</a>
-                        <a href="#" class="btn-hire-now">Hire Now</a>
+                        <a href="#" class="btn-view-profile">View Full Profile</a>
+                        <div class="appointment-container">
+                            <a href="#" class="btn-book-appointment">Book Appointment</a>
+                            <div class="appointment-platform-menu">
+                                <a href="#" class="appointment-option">
+                                    <img src="https://seeklogo.com/images/Z/zoom-icon-logo-C552F99BAB-seeklogo.com.png" alt="Zoom">
+                                    <span>Schedule via Zoom</span>
+                                </a>
+                                <a href="#" class="appointment-option">
+                                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/Google_Meet_icon.svg/2048px-Google_Meet_icon.svg.png" alt="Google Meet">
+                                    <span>Schedule via Google Meet</span>
+                                </a>
+                                <a href="#" class="appointment-option">
+                                    <img src="https://pages.calendly.com/wp-content/uploads/2022/01/Calendly-Square-1.jpg" alt="Calendly">
+                                    <span>Schedule via Calendly</span>
+                                </a>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 
@@ -2486,8 +2559,24 @@
                         </div>
                     </div>
                     <div class="talent-market-actions">
-                        <a href="#" class="btn-view-profile">View Profile</a>
-                        <a href="#" class="btn-hire-now">Hire Now</a>
+                        <a href="#" class="btn-view-profile">View Full Profile</a>
+                        <div class="appointment-container">
+                            <a href="#" class="btn-book-appointment">Book Appointment</a>
+                            <div class="appointment-platform-menu">
+                                <a href="#" class="appointment-option">
+                                    <img src="https://seeklogo.com/images/Z/zoom-icon-logo-C552F99BAB-seeklogo.com.png" alt="Zoom">
+                                    <span>Schedule via Zoom</span>
+                                </a>
+                                <a href="#" class="appointment-option">
+                                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/Google_Meet_icon.svg/2048px-Google_Meet_icon.svg.png" alt="Google Meet">
+                                    <span>Schedule via Google Meet</span>
+                                </a>
+                                <a href="#" class="appointment-option">
+                                    <img src="https://pages.calendly.com/wp-content/uploads/2022/01/Calendly-Square-1.jpg" alt="Calendly">
+                                    <span>Schedule via Calendly</span>
+                                </a>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 
@@ -2540,8 +2629,24 @@
                         </div>
                     </div>
                     <div class="talent-market-actions">
-                        <a href="#" class="btn-view-profile">View Profile</a>
-                        <a href="#" class="btn-hire-now">Hire Now</a>
+                        <a href="#" class="btn-view-profile">View Full Profile</a>
+                        <div class="appointment-container">
+                            <a href="#" class="btn-book-appointment">Book Appointment</a>
+                            <div class="appointment-platform-menu">
+                                <a href="#" class="appointment-option">
+                                    <img src="https://seeklogo.com/images/Z/zoom-icon-logo-C552F99BAB-seeklogo.com.png" alt="Zoom">
+                                    <span>Schedule via Zoom</span>
+                                </a>
+                                <a href="#" class="appointment-option">
+                                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/Google_Meet_icon.svg/2048px-Google_Meet_icon.svg.png" alt="Google Meet">
+                                    <span>Schedule via Google Meet</span>
+                                </a>
+                                <a href="#" class="appointment-option">
+                                    <img src="https://pages.calendly.com/wp-content/uploads/2022/01/Calendly-Square-1.jpg" alt="Calendly">
+                                    <span>Schedule via Calendly</span>
+                                </a>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 
@@ -2594,8 +2699,24 @@
                         </div>
                     </div>
                     <div class="talent-market-actions">
-                        <a href="#" class="btn-view-profile">View Profile</a>
-                        <a href="#" class="btn-hire-now">Hire Now</a>
+                        <a href="#" class="btn-view-profile">View Full Profile</a>
+                        <div class="appointment-container">
+                            <a href="#" class="btn-book-appointment">Book Appointment</a>
+                            <div class="appointment-platform-menu">
+                                <a href="#" class="appointment-option">
+                                    <img src="https://seeklogo.com/images/Z/zoom-icon-logo-C552F99BAB-seeklogo.com.png" alt="Zoom">
+                                    <span>Schedule via Zoom</span>
+                                </a>
+                                <a href="#" class="appointment-option">
+                                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/Google_Meet_icon.svg/2048px-Google_Meet_icon.svg.png" alt="Google Meet">
+                                    <span>Schedule via Google Meet</span>
+                                </a>
+                                <a href="#" class="appointment-option">
+                                    <img src="https://pages.calendly.com/wp-content/uploads/2022/01/Calendly-Square-1.jpg" alt="Calendly">
+                                    <span>Schedule via Calendly</span>
+                                </a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
