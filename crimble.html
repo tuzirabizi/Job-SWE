@@ -1863,7 +1863,7 @@
             margin-bottom: 50px;
         }
         
-        /* Simplified Talent Card Styles */
+        /* Improved Talent Card Styles */
         .talent-market-card {
             background-color: white;
             border-radius: 12px;
@@ -1873,7 +1873,9 @@
             display: flex;
             flex-direction: column;
             border: 1px solid #eee;
-            height: 420px; /* Fixed height for consistency */
+            position: relative;
+            height: auto;
+            min-height: 380px;
         }
         
         .talent-market-card:hover {
@@ -1923,6 +1925,8 @@
         .talent-market-content {
             padding: 20px 25px;
             flex: 1;
+            display: flex;
+            flex-direction: column;
         }
         
         .talent-market-name {
@@ -1969,6 +1973,7 @@
             gap: 8px;
             margin-bottom: 15px;
             justify-content: center;
+            margin-top: auto;
         }
         
         .talent-market-specialties span {
@@ -2108,9 +2113,12 @@
         }
         
         .talent-market-actions {
+            padding: 15px 25px 25px;
             display: flex;
-            padding: 0 25px 25px;
-            gap: 15px;
+            flex-direction: column;
+            gap: 10px;
+            border-top: 1px solid #f5f5f5;
+            background-color: #fafafa;
         }
         
         /* Enhanced View Profile Button */
@@ -2164,25 +2172,27 @@
         .appointment-platform-menu {
             display: none;
             position: absolute;
-            top: calc(100% + 10px);
+            bottom: 100%;
             left: 0;
             right: 0;
             background-color: white;
-            border-radius: 6px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            box-shadow: 0 -5px 30px rgba(0,0,0,0.15);
             z-index: 100;
-            padding: 10px;
+            padding: 15px;
+            margin-bottom: 5px;
         }
         
         .appointment-option {
             display: flex;
             align-items: center;
             gap: 10px;
-            padding: 10px;
+            padding: 12px;
             text-decoration: none;
             color: #333;
             transition: all 0.3s ease;
-            border-radius: 4px;
+            border-radius: 6px;
+            margin-bottom: 5px;
         }
         
         .appointment-option:hover {
@@ -2460,17 +2470,6 @@
                             <span>HTML/CSS</span>
                             <span>UI/UX</span>
                         </div>
-                        <p class="talent-market-description">
-                            Specialized in creating responsive, accessible, and high-performance web applications with modern JavaScript frameworks.
-                        </p>
-                        <div class="talent-market-projects">
-                            <h4>Project Types:</h4>
-                            <ul>
-                                <li>Single Page Applications</li>
-                                <li>E-commerce Websites</li>
-                                <li>Admin Dashboards</li>
-                            </ul>
-                        </div>
                         <div class="talent-market-appointment">
                             <h4>Schedule Appointment:</h4>
                             <div class="appointment-options">
@@ -2529,17 +2528,6 @@
                             <span>User Research</span>
                             <span>Figma</span>
                             <span>Adobe XD</span>
-                        </div>
-                        <p class="talent-market-description">
-                            Passionate designer creating intuitive and engaging user experiences with a focus on accessibility and conversion optimization.
-                        </p>
-                        <div class="talent-market-projects">
-                            <h4>Project Types:</h4>
-                            <ul>
-                                <li>Web & Mobile App Design</li>
-                                <li>Design Systems</li>
-                                <li>User Interface Redesigns</li>
-                            </ul>
                         </div>
                         <div class="talent-market-appointment">
                             <h4>Schedule Appointment:</h4>
@@ -2600,17 +2588,6 @@
                             <span>MongoDB</span>
                             <span>AWS</span>
                         </div>
-                        <p class="talent-market-description">
-                            Experienced backend developer with expertise in building scalable APIs, microservices, and cloud infrastructure.
-                        </p>
-                        <div class="talent-market-projects">
-                            <h4>Project Types:</h4>
-                            <ul>
-                                <li>API Development</li>
-                                <li>Database Architecture</li>
-                                <li>System Integration</li>
-                            </ul>
-                        </div>
                         <div class="talent-market-appointment">
                             <h4>Schedule Appointment:</h4>
                             <div class="appointment-options">
@@ -2669,17 +2646,6 @@
                             <span>SEM</span>
                             <span>Content Strategy</span>
                             <span>Analytics</span>
-                        </div>
-                        <p class="talent-market-description">
-                            Results-driven marketer specializing in digital campaigns, SEO optimization, and data-driven strategy development.
-                        </p>
-                        <div class="talent-market-projects">
-                            <h4>Project Types:</h4>
-                            <ul>
-                                <li>SEO Optimization</li>
-                                <li>Marketing Campaigns</li>
-                                <li>Growth Strategy</li>
-                            </ul>
                         </div>
                         <div class="talent-market-appointment">
                             <h4>Schedule Appointment:</h4>
