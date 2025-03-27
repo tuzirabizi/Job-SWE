@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome to Crimble.com</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      color: #333;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    .header {
+      background-color: #2c3e50;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+    .content {
+      padding: 20px;
+      background-color: #f9f9f9;
+    }
+    .footer {
+      text-align: center;
+      padding: 20px;
+      background-color: #2c3e50;
+      color: white;
+    }
+    .button {
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: #3498db;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      margin: 20px 0;
+    }
+    .features {
+      margin: 20px 0;
+    }
+    .feature-item {
+      margin: 10px 0;
+      padding: 10px;
+      background-color: white;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>Welcome to Crimble.com!</h1>
+    <p>Your AI-Powered Job Platform</p>
+  </div>
+
+  <div class="container">
+    <div class="content">
+      <h2>Hello {{firstName}},</h2>
+      
+      <p>Welcome to Crimble.com! We're excited to have you join our platform as a {{role}}. With Crimble.com, you'll have access to powerful AI-driven tools that will help you streamline your job search or hiring process.</p>
+
+      <div class="features">
+        <h3>What you can do with Crimble.com:</h3>
+        
+        {{#if (eq role "employer")}}
+          <div class="feature-item">
+            <strong>AI-Powered Job Posting:</strong> Create compelling job descriptions with our AI assistant
+          </div>
+          <div class="feature-item">
+            <strong>Smart Candidate Matching:</strong> Find the best candidates using our AI matching algorithm
+          </div>
+          <div class="feature-item">
+            <strong>Interview Scheduling:</strong> Streamline your interview process with integrated scheduling
+          </div>
+        {{else if (eq role "jobseeker")}}
+          <div class="feature-item">
+            <strong>AI Job Matching:</strong> Get personalized job recommendations based on your profile
+          </div>
+          <div class="feature-item">
+            <strong>Resume Optimization:</strong> Enhance your resume with AI-powered suggestions
+          </div>
+          <div class="feature-item">
+            <strong>Interview Preparation:</strong> Practice with our AI interview coach
+          </div>
+        {{else}}
+          <div class="feature-item">
+            <strong>Platform Management:</strong> Access powerful tools to manage the platform
+          </div>
+          <div class="feature-item">
+            <strong>Analytics Dashboard:</strong> Monitor platform performance and user engagement
+          </div>
+          <div class="feature-item">
+            <strong>User Management:</strong> Manage users and their permissions
+          </div>
+        {{/if}}
+      </div>
+
+      <p>To get started, please verify your email address by clicking the button below:</p>
+
+      <div style="text-align: center;">
+        <a href="{{verificationLink}}" class="button">Verify Email</a>
+      </div>
+
+      <p>If you have any questions or need assistance, our AI chatbot is available 24/7 to help you.</p>
+
+      <p>Best regards,<br>The Crimble.com Team</p>
+    </div>
+
+    <div class="footer">
+      <p>© 2024 Crimble.com. All rights reserved.</p>
+      <p>This email was sent to {{email}}. If you did not create an account with Crimble.com, please ignore this email.</p>
+    </div>
+  </div>
+</body>
+</html> 
