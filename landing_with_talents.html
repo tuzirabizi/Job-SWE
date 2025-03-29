@@ -1,0 +1,396 @@
+﻿/* Talent Showcase Section CSS */
+
+/* Talent Showcase Section */
+.talents {
+  padding: 80px 0;
+  background-color: white;
+}
+
+.talents-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 25px;
+}
+
+.talent-card {
+  background-color: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 3px 15px rgba(0,0,0,0.1);
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.talent-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+}
+
+.talent-portfolio {
+  height: 200px;
+  position: relative;
+  overflow: hidden;
+}
+
+.portfolio-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.talent-card:hover .portfolio-img {
+  transform: scale(1.05);
+}
+
+.portfolio-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 15px;
+  background: linear-gradient(transparent, rgba(0,0,0,0.7));
+  color: white;
+}
+
+.portfolio-category {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background-color: #2e7d32;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.talent-info {
+  padding: 20px;
+}
+
+.talent-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.talent-avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 15px;
+  border: 3px solid #2e7d32;
+}
+
+.talent-name-title {
+  flex: 1;
+}
+
+.talent-name {
+  font-size: 18px;
+  margin: 0 0 5px 0;
+  font-weight: 600;
+}
+
+.talent-title {
+  color: #666;
+  font-size: 14px;
+}
+
+.talent-rating {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.talent-rating-stars {
+  color: #ffc107;
+  margin-right: 8px;
+}
+
+.talent-description {
+  color: #666;
+  font-size: 14px;
+  margin-bottom: 15px;
+  line-height: 1.5;
+}
+
+.talent-skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 15px;
+}
+
+.talent-skill {
+  background-color: #f1f3f4;
+  color: #555;
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+}
+
+.talent-availability {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  padding: 10px;
+  background-color: #f8f9fa;
+  border-radius: 4px;
+}
+
+.availability-status {
+  display: flex;
+  align-items: center;
+}
+
+.status-indicator {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-right: 6px;
+}
+
+.status-available {
+  background-color: #4caf50;
+}
+
+.status-busy {
+  background-color: #ff9800;
+}
+
+.status-unavailable {
+  background-color: #f44336;
+}
+
+.availability-text {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.talent-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.view-profile-btn {
+  background-color: transparent;
+  color: #2e7d32;
+  border: 1px solid #2e7d32;
+  border-radius: 4px;
+  padding: 10px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  flex: 1;
+  text-align: center;
+}
+
+.view-profile-btn:hover {
+  background-color: rgba(46, 125, 50, 0.1);
+}
+
+.book-appointment-btn {
+  background-color: #2e7d32;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 10px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  flex: 1;
+  text-align: center;
+}
+
+.book-appointment-btn:hover {
+  background-color: #1b5e20;
+  transform: translateY(-2px);
+}
+
+.talent-signup {
+  background-color: #e8f5e9;
+  border-radius: 8px;
+  padding: 30px;
+  text-align: center;
+  margin-top: 50px;
+}
+
+.talent-signup h3 {
+  font-size: 24px;
+  color: #2e7d32;
+  margin-bottom: 15px;
+}
+
+.talent-signup p {
+  color: #666;
+  margin-bottom: 20px;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+@media (max-width: 1200px) {
+  .talents-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .talents-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+<!-- Talent Showcase Section HTML -->
+
+<!-- Add this section between the Jobs Section and the CTA Section -->
+
+<!-- Talent Showcase Section -->
+<div class="talents">
+  <div class="container">
+    <div class="section-title">
+      <h2>Featured Talents</h2>
+      <p>Discover top creative professionals and book appointments directly</p>
+    </div>
+    <div class="talents-grid">
+      <div class="talent-card">
+        <div class="talent-portfolio">
+          <img src="https://via.placeholder.com/400x200?text=UI+Design+Portfolio" alt="UI Design Portfolio" class="portfolio-img">
+          <div class="portfolio-category">UI/UX Design</div>
+          <div class="portfolio-overlay">
+            <h4>Modern Dashboard Design</h4>
+          </div>
+        </div>
+        <div class="talent-info">
+          <div class="talent-header">
+            <img src="https://via.placeholder.com/60x60?text=JD" alt="Jessica Davis" class="talent-avatar">
+            <div class="talent-name-title">
+              <h3 class="talent-name">Jessica Davis</h3>
+              <div class="talent-title">Senior UI/UX Designer</div>
+            </div>
+          </div>
+          <div class="talent-rating">
+            <div class="talent-rating-stars">★★★★★</div>
+            <div>(4.9)</div>
+          </div>
+          <div class="talent-description">
+            Award-winning designer with 7+ years experience creating intuitive and beautiful user interfaces.
+          </div>
+          <div class="talent-skills">
+            <div class="talent-skill">UI Design</div>
+            <div class="talent-skill">UX Research</div>
+            <div class="talent-skill">Figma</div>
+            <div class="talent-skill">Adobe XD</div>
+          </div>
+          <div class="talent-availability">
+            <div class="availability-status">
+              <div class="status-indicator status-available"></div>
+              <div class="availability-text">Available</div>
+            </div>
+            <div class="availability-time">Next: Today, 3:00 PM</div>
+          </div>
+          <div class="talent-actions">
+            <button class="view-profile-btn">View Profile</button>
+            <button class="book-appointment-btn">Book Appointment</button>
+          </div>
+        </div>
+      </div>
+      
+      <div class="talent-card">
+        <div class="talent-portfolio">
+          <img src="https://via.placeholder.com/400x200?text=Web+Development" alt="Web Development Portfolio" class="portfolio-img">
+          <div class="portfolio-category">Web Development</div>
+          <div class="portfolio-overlay">
+            <h4>E-commerce Platform</h4>
+          </div>
+        </div>
+        <div class="talent-info">
+          <div class="talent-header">
+            <img src="https://via.placeholder.com/60x60?text=AR" alt="Alex Rodriguez" class="talent-avatar">
+            <div class="talent-name-title">
+              <h3 class="talent-name">Alex Rodriguez</h3>
+              <div class="talent-title">Full-Stack Developer</div>
+            </div>
+          </div>
+          <div class="talent-rating">
+            <div class="talent-rating-stars">★★★★☆</div>
+            <div>(4.7)</div>
+          </div>
+          <div class="talent-description">
+            Specialized in building scalable web applications with modern frameworks and clean architecture.
+          </div>
+          <div class="talent-skills">
+            <div class="talent-skill">React</div>
+            <div class="talent-skill">Node.js</div>
+            <div class="talent-skill">MongoDB</div>
+            <div class="talent-skill">AWS</div>
+          </div>
+          <div class="talent-availability">
+            <div class="availability-status">
+              <div class="status-indicator status-busy"></div>
+              <div class="availability-text">Busy</div>
+            </div>
+            <div class="availability-time">Next: Tomorrow, 10:00 AM</div>
+          </div>
+          <div class="talent-actions">
+            <button class="view-profile-btn">View Profile</button>
+            <button class="book-appointment-btn">Book Appointment</button>
+          </div>
+        </div>
+      </div>
+      
+      <div class="talent-card">
+        <div class="talent-portfolio">
+          <img src="https://via.placeholder.com/400x200?text=Graphic+Design" alt="Graphic Design Portfolio" class="portfolio-img">
+          <div class="portfolio-category">Graphic Design</div>
+          <div class="portfolio-overlay">
+            <h4>Brand Identity Package</h4>
+          </div>
+        </div>
+        <div class="talent-info">
+          <div class="talent-header">
+            <img src="https://via.placeholder.com/60x60?text=EW" alt="Emma Wilson" class="talent-avatar">
+            <div class="talent-name-title">
+              <h3 class="talent-name">Emma Wilson</h3>
+              <div class="talent-title">Creative Director</div>
+            </div>
+          </div>
+          <div class="talent-rating">
+            <div class="talent-rating-stars">★★★★★</div>
+            <div>(5.0)</div>
+          </div>
+          <div class="talent-description">
+            Creating distinctive visual identities and branding solutions for businesses of all sizes.
+          </div>
+          <div class="talent-skills">
+            <div class="talent-skill">Brand Identity</div>
+            <div class="talent-skill">Logo Design</div>
+            <div class="talent-skill">Typography</div>
+            <div class="talent-skill">Illustrator</div>
+          </div>
+          <div class="talent-availability">
+            <div class="availability-status">
+              <div class="status-indicator status-unavailable"></div>
+              <div class="availability-text">Unavailable</div>
+            </div>
+            <div class="availability-time">Next: Friday, 2:00 PM</div>
+          </div>
+          <div class="talent-actions">
+            <button class="view-profile-btn">View Profile</button>
+            <button class="book-appointment-btn" disabled style="opacity: 0.6; cursor: not-allowed;">Currently Unavailable</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="talent-signup">
+      <h3>Are You a Creative Professional?</h3>
+      <p>Showcase your work and get hired by thousands of clients looking for your skills. Create a portfolio, set your availability, and start receiving appointment requests.</p>
+      <button class="btn btn-primary btn-large">Sign Up as Talent</button>
+    </div>
+  </div>
+</div>
