@@ -1,1 +1,49 @@
- 
+{
+  "name": "crimble-frontend",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@emotion/react": "^11.11.0",
+    "@emotion/styled": "^11.11.0",
+    "@mui/icons-material": "^5.11.16",
+    "@mui/material": "^5.13.0",
+    "dotenv": "^16.4.7",
+    "pg": "^8.14.1",
+    "pg-hstore": "^2.3.4",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^7.4.1",
+    "react-scripts": "5.0.1",
+    "recharts": "^2.15.1",
+    "sequelize": "^6.37.7"
+  },
+  "scripts": {
+    "start": "cross-env REACT_APP_API_URL=http://localhost:5000/api react-scripts start",
+    "build": "cross-env REACT_APP_API_URL=http://localhost:5000/api react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.16",
+    "cross-env": "^7.0.3",
+    "postcss": "^8.4.33",
+    "tailwindcss": "^3.3.3"
+  }
+}
