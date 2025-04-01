@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard - Crimble</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2e7d32;
+            --secondary-color: #43a047;
+            --text-color: #333;
+            --light-gray: #f8f9fa;
+            --border-color: #e0e0e0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--light-gray);
+            color: var(--text-color);
+        }
+
+        .dashboard {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            min-height: 100vh;
+        }
+
+        /* Sidebar Styles */
+        .sidebar {
+            background-color: white;
+            padding: 20px;
+            box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+        }
+
+        .profile-section {
+            text-align: center;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .profile-picture {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin-bottom: 10px;
+            object-fit: cover;
+        }
+
+        .profile-name {
+            font-size: 18px;
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+
+        .profile-email {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .nav-menu {
+            margin-top: 20px;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 15px;
+            color: var(--text-color);
+            text-decoration: none;
+            border-radius: 8px;
+            margin-bottom: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-item:hover {
+            background-color: var(--light-gray);
+            color: var(--primary-color);
+        }
+
+        .nav-item.active {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .nav-item i {
+            margin-right: 10px;
+            width: 20px;
+        }
+
+        /* Main Content Styles */
+        .main-content {
+            padding: 20px;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .welcome-section h1 {
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+
+        .welcome-section p {
+            color: #666;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .stat-card h3 {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        .stat-card .number {
+            font-size: 24px;
+            font-weight: 500;
+            color: var(--primary-color);
+        }
+
+        .section-title {
+            font-size: 20px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .section-title a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .applications-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .application-card {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .application-card h3 {
+            margin-bottom: 10px;
+        }
+
+        .application-card .company {
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .application-status {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 12px;
+            margin-bottom: 15px;
+        }
+
+        .status-pending {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+
+        .status-reviewing {
+            background-color: #cce5ff;
+            color: #004085;
+        }
+
+        .status-shortlisted {
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        .status-rejected {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+
+        .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .course-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .course-image {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+        }
+
+        .course-content {
+            padding: 20px;
+        }
+
+        .course-content h3 {
+            margin-bottom: 10px;
+        }
+
+        .course-progress {
+            margin: 15px 0;
+        }
+
+        .progress-bar {
+            height: 6px;
+            background-color: var(--light-gray);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background-color: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+
+        .progress-text {
+            font-size: 12px;
+            color: #666;
+            margin-top: 5px;
+        }
+
+        .resume-section {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+
+        .resume-preview {
+            display: flex;
+            align-items: center;
+            margin-top: 15px;
+        }
+
+        .resume-preview img {
+            width: 50px;
+            height: 50px;
+            margin-right: 15px;
+        }
+
+        .resume-info h4 {
+            margin-bottom: 5px;
+        }
+
+        .resume-info p {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--secondary-color);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 1px solid var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="profile-section">
+                <img src="https://via.placeholder.com/100" alt="Profile" class="profile-picture">
+                <div class="profile-name">John Doe</div>
+                <div class="profile-email">john.doe@example.com</div>
+            </div>
+            <nav class="nav-menu">
+                <a href="#" class="nav-item active">
+                    <i class="fas fa-home"></i>
+                    Dashboard
+                </a>
+                <a href="#" class="nav-item">
+                    <i class="fas fa-briefcase"></i>
+                    Job Applications
+                </a>
+                <a href="#" class="nav-item">
+                    <i class="fas fa-graduation-cap"></i>
+                    My Courses
+                </a>
+                <a href="#" class="nav-item">
+                    <i class="fas fa-file-alt"></i>
+                    Resume Builder
+                </a>
+                <a href="#" class="nav-item">
+                    <i class="fas fa-comments"></i>
+                    Messages
+                </a>
+                <a href="#" class="nav-item">
+                    <i class="fas fa-cog"></i>
+                    Settings
+                </a>
+            </nav>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <div class="header">
+                <div class="welcome-section">
+                    <h1>Welcome back, John!</h1>
+                    <p>Here's what's happening with your applications and courses</p>
+                </div>
+                <button class="btn btn-primary">
+                    <i class="fas fa-plus"></i> New Application
+                </button>
+            </div>
+
+            <!-- Stats Grid -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h3>Active Applications</h3>
+                    <div class="number">5</div>
+                </div>
+                <div class="stat-card">
+                    <h3>Courses in Progress</h3>
+                    <div class="number">3</div>
+                </div>
+                <div class="stat-card">
+                    <h3>Messages</h3>
+                    <div class="number">2</div>
+                </div>
+            </div>
+
+            <!-- Recent Applications -->
+            <div class="section-title">
+                <h2>Recent Applications</h2>
+                <a href="#">View All</a>
+            </div>
+            <div class="applications-grid">
+                <div class="application-card">
+                    <h3>Software Engineer</h3>
+                    <div class="company">Tech Corp</div>
+                    <div class="application-status status-reviewing">Under Review</div>
+                    <p>Applied on: Aug 15, 2023</p>
+                    <button class="btn btn-outline">View Details</button>
+                </div>
+                <div class="application-card">
+                    <h3>Frontend Developer</h3>
+                    <div class="company">Web Solutions</div>
+                    <div class="application-status status-shortlisted">Shortlisted</div>
+                    <p>Applied on: Aug 10, 2023</p>
+                    <button class="btn btn-outline">View Details</button>
+                </div>
+                <div class="application-card">
+                    <h3>UI/UX Designer</h3>
+                    <div class="company">Design Studio</div>
+                    <div class="application-status status-pending">Pending</div>
+                    <p>Applied on: Aug 5, 2023</p>
+                    <button class="btn btn-outline">View Details</button>
+                </div>
+            </div>
+
+            <!-- Courses in Progress -->
+            <div class="section-title">
+                <h2>Courses in Progress</h2>
+                <a href="#">View All</a>
+            </div>
+            <div class="courses-grid">
+                <div class="course-card">
+                    <img src="https://via.placeholder.com/300x150" alt="Course" class="course-image">
+                    <div class="course-content">
+                        <h3>Web Development Fundamentals</h3>
+                        <div class="course-progress">
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 75%"></div>
+                            </div>
+                            <div class="progress-text">75% Complete</div>
+                        </div>
+                        <button class="btn btn-primary">Continue Learning</button>
+                    </div>
+                </div>
+                <div class="course-card">
+                    <img src="https://via.placeholder.com/300x150" alt="Course" class="course-image">
+                    <div class="course-content">
+                        <h3>UI/UX Design Principles</h3>
+                        <div class="course-progress">
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 45%"></div>
+                            </div>
+                            <div class="progress-text">45% Complete</div>
+                        </div>
+                        <button class="btn btn-primary">Continue Learning</button>
+                    </div>
+                </div>
+                <div class="course-card">
+                    <img src="https://via.placeholder.com/300x150" alt="Course" class="course-image">
+                    <div class="course-content">
+                        <h3>Data Structures & Algorithms</h3>
+                        <div class="course-progress">
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 30%"></div>
+                            </div>
+                            <div class="progress-text">30% Complete</div>
+                        </div>
+                        <button class="btn btn-primary">Continue Learning</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Resume Section -->
+            <div class="section-title">
+                <h2>My Resume</h2>
+                <a href="#">Edit Resume</a>
+            </div>
+            <div class="resume-section">
+                <div class="resume-preview">
+                    <img src="https://via.placeholder.com/50" alt="Resume">
+                    <div class="resume-info">
+                        <h4>Professional Resume</h4>
+                        <p>Last updated: Aug 20, 2023</p>
+                    </div>
+                </div>
+                <button class="btn btn-primary" style="margin-top: 15px;">
+                    <i class="fas fa-download"></i> Download Resume
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Add interactivity here
+        document.addEventListener('DOMContentLoaded', function() {
+            // Handle navigation
+            const navItems = document.querySelectorAll('.nav-item');
+            navItems.forEach(item => {
+                item.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    navItems.forEach(nav => nav.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+
+            // Handle buttons
+            const buttons = document.querySelectorAll('.btn');
+            buttons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Add button click handlers here
+                    console.log('Button clicked:', this.textContent);
+                });
+            });
+        });
+    </script>
+</body>
+</html> 

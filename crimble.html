@@ -1,0 +1,2573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crimble - Professional Talent Showcase</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            font-size: 16px;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Modern Header Styles */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: #000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            height: 80px;
+            display: flex;
+            align-items: center;
+        }
+
+        .nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 40px;
+            width: 100%;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            text-decoration: none;
+            margin-right: 80px;
+        }
+
+        .logo img {
+            width: 45px;
+            height: 45px;
+            border-radius: 8px;
+        }
+
+        .logo span {
+            font-size: 28px;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 50px;
+            margin-right: 80px;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 8px 0;
+        }
+
+        .nav-links a:hover {
+            color: #007bff;
+        }
+
+        .nav-links a.active {
+            color: #007bff;
+        }
+
+        .nav-links a.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: #007bff;
+            border-radius: 2px;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid #fff;
+            color: #fff;
+            padding: 10px 25px;
+            border-radius: 5px;
+            font-weight: 600;
+            font-size: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            height: 45px;
+            display: flex;
+            align-items: center;
+        }
+
+        .btn-primary {
+            background: #007bff;
+            border: none;
+            color: #fff;
+            padding: 10px 25px;
+            border-radius: 5px;
+            font-weight: 600;
+            font-size: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            height: 45px;
+            display: flex;
+            align-items: center;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 24px;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .nav-buttons {
+                display: none;
+            }
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1001;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 400px;
+            position: relative;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 24px;
+            cursor: pointer;
+            color: #666;
+        }
+
+        .modal h2 {
+            margin-bottom: 20px;
+            color: #333;
+            font-weight: 600;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #666;
+            font-weight: 500;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #007bff;
+        }
+
+        .modal .btn-primary {
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+        }
+
+        /* Hero Section Styles */
+        .hero {
+            background: linear-gradient(135deg, #1a1a1a 0%, #333 100%);
+            color: #fff;
+            padding: 120px 0 60px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('https://via.placeholder.com/1920x1080') center/cover;
+            opacity: 0.1;
+            z-index: 1;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero p {
+            font-size: 18px;
+            margin-bottom: 30px;
+            color: rgba(255, 255, 255, 0.8);
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        .search-box {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .search-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            justify-content: center;
+        }
+
+        .search-tab {
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .search-tab.active {
+            background: #007bff;
+            border-color: #007bff;
+        }
+
+        .search-inputs {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr auto;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .search-input {
+            position: relative;
+        }
+
+        .search-input input {
+            width: 100%;
+            padding: 15px 15px 15px 45px;
+            border: none;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.9);
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .search-input input:focus {
+            background: #fff;
+            box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.2);
+            outline: none;
+        }
+
+        .search-input i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #666;
+        }
+
+        .search-button {
+            padding: 15px 30px;
+            background: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            white-space: nowrap;
+        }
+
+        .search-button:hover {
+            background: #0056b3;
+            transform: translateY(-2px);
+        }
+
+        .search-options {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 15px;
+        }
+
+        .search-option {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 14px;
+        }
+
+        .search-option i {
+            color: #007bff;
+        }
+
+        .signup-options {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+
+        .signup-btn {
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .signup-btn.student {
+            background: #4CAF50;
+            color: #fff;
+            border: none;
+        }
+
+        .signup-btn.talent {
+            background: #2196F3;
+            color: #fff;
+            border: none;
+        }
+
+        .signup-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .popular-tags {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .popular-tags span {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .popular-tags a {
+            color: #fff;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .popular-tags a:hover {
+            color: #007bff;
+        }
+
+        /* Jobs Section Styles */
+        .jobs {
+            padding: 80px 0;
+            background: #f8f9fa;
+        }
+
+        .jobs h2 {
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 36px;
+            font-weight: 700;
+        }
+
+        .filter-row {
+            margin-bottom: 30px;
+        }
+
+        .filter-group {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .filter-group select {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+            min-width: 150px;
+        }
+
+        .jobs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .job-card {
+            background: #fff;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .job-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .job-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .job-header img {
+            width: 50px;
+            height: 50px;
+            border-radius: 8px;
+        }
+
+        .job-info h3 {
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+
+        .job-info p {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .job-details {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+            color: #666;
+            font-size: 14px;
+        }
+
+        .job-details span {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .job-tags {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 15px;
+        }
+
+        .job-tags span {
+            background: #f0f0f0;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 12px;
+            color: #666;
+        }
+
+        .job-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            .search-box {
+                flex-direction: column;
+            }
+
+            .filter-group {
+                flex-direction: column;
+            }
+
+            .filter-group select {
+                width: 100%;
+            }
+
+            .jobs-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Courses Section Styles */
+        .courses {
+            padding: 80px 0;
+        }
+
+        .courses h2 {
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 36px;
+            font-weight: 700;
+        }
+
+        .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .course-card {
+            background: #fff;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .course-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .course-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .course-content {
+            padding: 20px;
+        }
+
+        .course-category {
+            display: inline-block;
+            background: #e3f2fd;
+            color: #1976d2;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 12px;
+            margin-bottom: 10px;
+        }
+
+        .course-content h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .course-content p {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .course-meta {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+            color: #666;
+            font-size: 14px;
+        }
+
+        .course-meta span {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .course-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .courses-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Footer Styles */
+        .footer {
+            background: #000;
+            color: #fff;
+            padding: 80px 0 20px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr repeat(4, 1fr);
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+
+        .footer-section h4 {
+            color: #fff;
+            font-size: 18px;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .footer-logo img {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+        }
+
+        .footer-logo span {
+            font-size: 24px;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .footer-description {
+            color: #999;
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background: #007bff;
+            transform: translateY(-3px);
+        }
+
+        .footer-links {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: #999;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: #fff;
+        }
+
+        .footer-bottom {
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-bottom-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #999;
+            font-size: 14px;
+        }
+
+        .footer-bottom-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .footer-bottom-links a {
+            color: #999;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-bottom-links a:hover {
+            color: #fff;
+        }
+
+        @media (max-width: 1024px) {
+            .footer-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-bottom-content {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+
+            .footer-bottom-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+        }
+
+        /* Filter Styles */
+        .filter-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .filter-group {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .filter-select {
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background: #fff;
+            min-width: 150px;
+            font-size: 14px;
+            color: #333;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .filter-select:hover {
+            border-color: #007bff;
+        }
+
+        .filter-select:focus {
+            outline: none;
+            border-color: #007bff;
+            box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.1);
+        }
+
+        .filter-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        /* Bottom Banner Styles */
+        .bottom-banner {
+            background: linear-gradient(135deg, #000 0%, #333 100%);
+            color: #fff;
+            padding: 80px 0;
+            margin-top: 80px;
+        }
+
+        .banner-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .banner-text h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+            color: #fff;
+        }
+
+        .banner-text p {
+            font-size: 18px;
+            color: #ccc;
+            margin-bottom: 40px;
+            line-height: 1.6;
+        }
+
+        .banner-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            display: block;
+            font-size: 36px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            color: #ccc;
+        }
+
+        .banner-actions {
+            display: flex;
+            gap: 15px;
+        }
+
+        .banner-image img {
+            width: 100%;
+            border-radius: 12px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Enhanced Card Hover Effects */
+        .job-card, .course-card, .talent-card {
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+        }
+
+        .job-card:hover, .course-card:hover, .talent-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            border-color: #007bff;
+        }
+
+        .talent-card {
+            background: #fff;
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border: 1px solid #e0e0e0;
+            position: relative;
+            overflow: hidden;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .talent-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            border-color: #007bff;
+        }
+
+        .talent-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .talent-photo {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #007bff;
+        }
+
+        .talent-info h3 {
+            font-size: 16px;
+            margin-bottom: 3px;
+            color: #333;
+        }
+
+        .talent-info p {
+            color: #666;
+            font-size: 13px;
+        }
+
+        .talent-stats {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 12px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #e0e0e0;
+            font-size: 12px;
+        }
+
+        .talent-description {
+            margin-bottom: 12px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #e0e0e0;
+            font-size: 13px;
+            line-height: 1.4;
+            flex-grow: 1;
+        }
+
+        .talent-tags {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+            margin-bottom: 12px;
+        }
+
+        .talent-tags span {
+            background: #f0f0f0;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 11px;
+            color: #666;
+            border: 1px solid #e0e0e0;
+        }
+
+        .talent-actions {
+            display: flex;
+            gap: 8px;
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid #e0e0e0;
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+            transition: none;
+        }
+
+        .talent-actions .btn {
+            flex: 1;
+            padding: 8px 12px;
+            font-size: 13px;
+            background: #fff;
+            border: 1px solid #007bff;
+            color: #007bff;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .talent-actions .btn-primary {
+            background: #007bff;
+            color: #fff;
+            border: none;
+        }
+
+        .talent-actions .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 2px 8px rgba(0, 123, 255, 0.2);
+        }
+
+        .talent-actions .btn-primary:hover {
+            background: #0056b3;
+        }
+
+        .availability-status {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 500;
+            z-index: 1;
+        }
+
+        .status-available {
+            background: #4CAF50;
+            color: #fff;
+        }
+
+        .status-busy {
+            background: #f44336;
+            color: #fff;
+        }
+
+        .status-soon {
+            background: #ff9800;
+            color: #fff;
+        }
+
+        .read-more-btn {
+            color: #007bff;
+            background: none;
+            border: none;
+            padding: 5px 0;
+            cursor: pointer;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+
+        .read-more-btn:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .banner-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .banner-stats {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .banner-actions {
+                justify-content: center;
+            }
+
+            .filter-row {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .filter-group {
+                flex-direction: column;
+            }
+
+            .filter-select {
+                width: 100%;
+            }
+
+            .filter-actions {
+                justify-content: center;
+            }
+        }
+
+        /* Talents Section Styles */
+        .talents {
+            padding: 80px 0;
+            background: #f8f9fa;
+        }
+
+        .talents-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .talent-card {
+            background: #fff;
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border: 1px solid #e0e0e0;
+            position: relative;
+            overflow: hidden;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .talent-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            border-color: #007bff;
+        }
+
+        .talent-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .talent-photo {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #007bff;
+        }
+
+        .talent-info h3 {
+            font-size: 16px;
+            margin-bottom: 3px;
+            color: #333;
+        }
+
+        .talent-info p {
+            color: #666;
+            font-size: 13px;
+        }
+
+        .talent-stats {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 12px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #e0e0e0;
+            font-size: 12px;
+        }
+
+        .talent-description {
+            margin-bottom: 12px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #e0e0e0;
+            font-size: 13px;
+            line-height: 1.4;
+            flex-grow: 1;
+        }
+
+        .talent-tags {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+            margin-bottom: 12px;
+        }
+
+        .talent-tags span {
+            background: #f0f0f0;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 11px;
+            color: #666;
+            border: 1px solid #e0e0e0;
+        }
+
+        .talent-actions {
+            display: flex;
+            gap: 8px;
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid #e0e0e0;
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+            transition: none;
+        }
+
+        .talent-actions .btn {
+            flex: 1;
+            padding: 8px 12px;
+            font-size: 13px;
+            background: #fff;
+            border: 1px solid #007bff;
+            color: #007bff;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .talent-actions .btn-primary {
+            background: #007bff;
+            color: #fff;
+            border: none;
+        }
+
+        .talent-actions .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 2px 8px rgba(0, 123, 255, 0.2);
+        }
+
+        .talent-actions .btn-primary:hover {
+            background: #0056b3;
+        }
+
+        .availability-status {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 500;
+            z-index: 1;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <nav class="nav">
+                <a href="#" class="logo">
+                    <img src="https://via.placeholder.com/45" alt="Crimble Logo">
+                    <span>Crimble</span>
+                </a>
+                <div class="nav-links">
+                    <a href="#home">Home</a>
+                    <a href="#jobs">Jobs</a>
+                    <a href="#courses">Courses</a>
+                    <a href="#talents">Talents</a>
+                </div>
+                <div class="nav-buttons">
+                    <button class="btn btn-outline" onclick="showLoginModal()">Sign In</button>
+                    <button class="btn btn-primary" onclick="showSignupModal()">Get Started</button>
+                </div>
+                <button class="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Find Your Dream Job or Next Career Move</h1>
+                <p>Connect with top companies and talented professionals. Your future starts here.</p>
+                <div class="search-box">
+                    <div class="search-tabs">
+                        <div class="search-tab active">Jobs</div>
+                        <div class="search-tab">Courses</div>
+                        <div class="search-tab">Talents</div>
+                    </div>
+                    <div class="search-inputs">
+                        <div class="search-input">
+                            <i class="fas fa-search"></i>
+                            <input type="text" placeholder="What are you looking for?">
+                        </div>
+                        <div class="search-input">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <input type="text" placeholder="Location">
+                        </div>
+                        <div class="search-input">
+                            <i class="fas fa-briefcase"></i>
+                            <input type="text" placeholder="Experience Level">
+                        </div>
+                        <button class="search-button">
+                            <i class="fas fa-search"></i>
+                            Search
+                        </button>
+                    </div>
+                    <div class="search-options">
+                        <div class="search-option">
+                            <i class="fas fa-clock"></i>
+                            <span>Full Time</span>
+                        </div>
+                        <div class="search-option">
+                            <i class="fas fa-graduation-cap"></i>
+                            <span>Remote</span>
+                        </div>
+                        <div class="search-option">
+                            <i class="fas fa-dollar-sign"></i>
+                            <span>Salary Range</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="signup-options">
+                    <button class="signup-btn student" onclick="showSignupModal('student')">
+                        <i class="fas fa-user-graduate"></i>
+                        Sign Up as Student
+                    </button>
+                    <button class="signup-btn talent" onclick="showSignupModal('talent')">
+                        <i class="fas fa-user-tie"></i>
+                        Sign Up as Talent
+                    </button>
+                </div>
+                <div class="popular-tags">
+                    <span>Popular:</span>
+                    <a href="#">Software Engineer</a>
+                    <a href="#">UI/UX Designer</a>
+                    <a href="#">Product Manager</a>
+                    <a href="#">Data Scientist</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Jobs Section -->
+    <section id="jobs" class="jobs">
+        <div class="container">
+            <h2>Featured Jobs</h2>
+            <div class="filter-row">
+                <div class="filter-group">
+                    <select class="filter-select">
+                        <option value="">All Categories</option>
+                        <option value="development">Development</option>
+                        <option value="design">Design</option>
+                        <option value="marketing">Marketing</option>
+                        <option value="sales">Sales</option>
+                        <option value="product">Product</option>
+                        <option value="data">Data Science</option>
+                    </select>
+                    <select class="filter-select">
+                        <option value="">All Locations</option>
+                        <option value="remote">Remote</option>
+                        <option value="onsite">On-site</option>
+                        <option value="hybrid">Hybrid</option>
+                        <option value="anywhere">Anywhere</option>
+                    </select>
+                    <select class="filter-select">
+                        <option value="">All Types</option>
+                        <option value="fulltime">Full-time</option>
+                        <option value="parttime">Part-time</option>
+                        <option value="contract">Contract</option>
+                        <option value="internship">Internship</option>
+                    </select>
+                    <select class="filter-select">
+                        <option value="">Experience Level</option>
+                        <option value="entry">Entry Level</option>
+                        <option value="mid">Mid Level</option>
+                        <option value="senior">Senior Level</option>
+                        <option value="lead">Lead</option>
+                    </select>
+                </div>
+                <div class="filter-actions">
+                    <button class="btn btn-outline" onclick="resetFilters()">Reset</button>
+                    <button class="btn btn-primary" onclick="applyFilters()">Apply Filters</button>
+                </div>
+            </div>
+            <div class="jobs-grid">
+                <!-- Job Card 1 -->
+                <div class="job-card">
+                    <div class="job-header">
+                        <img src="https://via.placeholder.com/50" alt="Company Logo">
+                        <div class="job-info">
+                            <h3>Senior Software Engineer</h3>
+                            <p>Google</p>
+                        </div>
+                    </div>
+                    <div class="job-details">
+                        <span><i class="fas fa-map-marker-alt"></i> Remote</span>
+                        <span><i class="fas fa-clock"></i> Full-time</span>
+                        <span><i class="fas fa-dollar-sign"></i> $150k - $200k</span>
+                    </div>
+                    <div class="job-tags">
+                        <span>React</span>
+                        <span>Node.js</span>
+                        <span>TypeScript</span>
+                    </div>
+                    <div class="job-actions">
+                        <button class="btn btn-outline">Save</button>
+                        <button class="btn btn-primary">Apply Now</button>
+                    </div>
+                </div>
+
+                <!-- Job Card 2 -->
+                <div class="job-card">
+                    <div class="job-header">
+                        <img src="https://via.placeholder.com/50" alt="Company Logo">
+                        <div class="job-info">
+                            <h3>UI/UX Designer</h3>
+                            <p>Adobe</p>
+                        </div>
+                    </div>
+                    <div class="job-details">
+                        <span><i class="fas fa-map-marker-alt"></i> San Francisco, CA</span>
+                        <span><i class="fas fa-clock"></i> Full-time</span>
+                        <span><i class="fas fa-dollar-sign"></i> $120k - $160k</span>
+                    </div>
+                    <div class="job-tags">
+                        <span>Figma</span>
+                        <span>Adobe XD</span>
+                        <span>User Research</span>
+                    </div>
+                    <div class="job-actions">
+                        <button class="btn btn-outline">Save</button>
+                        <button class="btn btn-primary">Apply Now</button>
+                    </div>
+                </div>
+
+                <!-- Job Card 3 -->
+                <div class="job-card">
+                    <div class="job-header">
+                        <img src="https://via.placeholder.com/50" alt="Company Logo">
+                        <div class="job-info">
+                            <h3>Product Manager</h3>
+                            <p>Amazon</p>
+                        </div>
+                    </div>
+                    <div class="job-details">
+                        <span><i class="fas fa-map-marker-alt"></i> Seattle, WA</span>
+                        <span><i class="fas fa-clock"></i> Full-time</span>
+                        <span><i class="fas fa-dollar-sign"></i> $140k - $180k</span>
+                    </div>
+                    <div class="job-tags">
+                        <span>Product Strategy</span>
+                        <span>Agile</span>
+                        <span>Data Analysis</span>
+                    </div>
+                    <div class="job-actions">
+                        <button class="btn btn-outline">Save</button>
+                        <button class="btn btn-primary">Apply Now</button>
+                    </div>
+                </div>
+
+                <!-- Job Card 4 -->
+                <div class="job-card">
+                    <div class="job-header">
+                        <img src="https://via.placeholder.com/50" alt="Company Logo">
+                        <div class="job-info">
+                            <h3>Data Scientist</h3>
+                            <p>Microsoft</p>
+                        </div>
+                    </div>
+                    <div class="job-details">
+                        <span><i class="fas fa-map-marker-alt"></i> Remote</span>
+                        <span><i class="fas fa-clock"></i> Full-time</span>
+                        <span><i class="fas fa-dollar-sign"></i> $130k - $170k</span>
+                    </div>
+                    <div class="job-tags">
+                        <span>Python</span>
+                        <span>Machine Learning</span>
+                        <span>SQL</span>
+                    </div>
+                    <div class="job-actions">
+                        <button class="btn btn-outline">Save</button>
+                        <button class="btn btn-primary">Apply Now</button>
+                    </div>
+                </div>
+
+                <!-- Job Card 5 -->
+                <div class="job-card">
+                    <div class="job-header">
+                        <img src="https://via.placeholder.com/50" alt="Company Logo">
+                        <div class="job-info">
+                            <h3>Marketing Manager</h3>
+                            <p>HubSpot</p>
+                        </div>
+                    </div>
+                    <div class="job-details">
+                        <span><i class="fas fa-map-marker-alt"></i> Boston, MA</span>
+                        <span><i class="fas fa-clock"></i> Full-time</span>
+                        <span><i class="fas fa-dollar-sign"></i> $100k - $140k</span>
+                    </div>
+                    <div class="job-tags">
+                        <span>Digital Marketing</span>
+                        <span>Content Strategy</span>
+                        <span>Analytics</span>
+                    </div>
+                    <div class="job-actions">
+                        <button class="btn btn-outline">Save</button>
+                        <button class="btn btn-primary">Apply Now</button>
+                    </div>
+                </div>
+
+                <!-- Job Card 6 -->
+                <div class="job-card">
+                    <div class="job-header">
+                        <img src="https://via.placeholder.com/50" alt="Company Logo">
+                        <div class="job-info">
+                            <h3>DevOps Engineer</h3>
+                            <p>Netflix</p>
+                        </div>
+                    </div>
+                    <div class="job-details">
+                        <span><i class="fas fa-map-marker-alt"></i> Los Gatos, CA</span>
+                        <span><i class="fas fa-clock"></i> Full-time</span>
+                        <span><i class="fas fa-dollar-sign"></i> $160k - $200k</span>
+                    </div>
+                    <div class="job-tags">
+                        <span>AWS</span>
+                        <span>Kubernetes</span>
+                        <span>CI/CD</span>
+                    </div>
+                    <div class="job-actions">
+                        <button class="btn btn-outline">Save</button>
+                        <button class="btn btn-primary">Apply Now</button>
+                    </div>
+                </div>
+
+                <!-- Job Card 7 -->
+                <div class="job-card">
+                    <div class="job-header">
+                        <img src="https://via.placeholder.com/50" alt="Company Logo">
+                        <div class="job-info">
+                            <h3>Sales Director</h3>
+                            <p>Salesforce</p>
+                        </div>
+                    </div>
+                    <div class="job-details">
+                        <span><i class="fas fa-map-marker-alt"></i> San Francisco, CA</span>
+                        <span><i class="fas fa-clock"></i> Full-time</span>
+                        <span><i class="fas fa-dollar-sign"></i> $180k - $220k</span>
+                    </div>
+                    <div class="job-tags">
+                        <span>Sales Strategy</span>
+                        <span>Team Leadership</span>
+                        <span>CRM</span>
+                    </div>
+                    <div class="job-actions">
+                        <button class="btn btn-outline">Save</button>
+                        <button class="btn btn-primary">Apply Now</button>
+                    </div>
+                </div>
+
+                <!-- Job Card 8 -->
+                <div class="job-card">
+                    <div class="job-header">
+                        <img src="https://via.placeholder.com/50" alt="Company Logo">
+                        <div class="job-info">
+                            <h3>Frontend Developer</h3>
+                            <p>Meta</p>
+                        </div>
+                    </div>
+                    <div class="job-details">
+                        <span><i class="fas fa-map-marker-alt"></i> Remote</span>
+                        <span><i class="fas fa-clock"></i> Full-time</span>
+                        <span><i class="fas fa-dollar-sign"></i> $130k - $170k</span>
+                    </div>
+                    <div class="job-tags">
+                        <span>React</span>
+                        <span>Next.js</span>
+                        <span>TypeScript</span>
+                    </div>
+                    <div class="job-actions">
+                        <button class="btn btn-outline">Save</button>
+                        <button class="btn btn-primary">Apply Now</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Courses Section -->
+    <section id="courses" class="courses">
+        <div class="container">
+            <h2>Featured Courses</h2>
+            <div class="filter-row">
+                <div class="filter-group">
+                    <select class="filter-select">
+                        <option value="">All Categories</option>
+                        <option value="development">Development</option>
+                        <option value="design">Design</option>
+                        <option value="marketing">Marketing</option>
+                        <option value="business">Business</option>
+                        <option value="data">Data Science</option>
+                    </select>
+                    <select class="filter-select">
+                        <option value="">Difficulty Level</option>
+                        <option value="beginner">Beginner</option>
+                        <option value="intermediate">Intermediate</option>
+                        <option value="advanced">Advanced</option>
+                    </select>
+                    <select class="filter-select">
+                        <option value="">Price Range</option>
+                        <option value="free">Free</option>
+                        <option value="paid">Paid</option>
+                        <option value="all">All</option>
+                    </select>
+                </div>
+                <div class="filter-actions">
+                    <button class="btn btn-outline" onclick="resetFilters()">Reset</button>
+                    <button class="btn btn-primary" onclick="applyFilters()">Apply Filters</button>
+                </div>
+            </div>
+            <div class="courses-grid">
+                <!-- Course Card 1 -->
+                <div class="course-card">
+                    <img src="https://via.placeholder.com/300x200" alt="Course Image">
+                    <div class="course-content">
+                        <span class="course-category">Development</span>
+                        <h3>Complete Web Development Bootcamp</h3>
+                        <p>Master modern web development with this comprehensive course covering HTML, CSS, JavaScript, and more.</p>
+                        <div class="course-meta">
+                            <span><i class="fas fa-signal"></i> Beginner</span>
+                            <span><i class="fas fa-clock"></i> 12 weeks</span>
+                            <span><i class="fas fa-dollar-sign"></i> $199</span>
+                        </div>
+                        <div class="course-actions">
+                            <button class="btn btn-primary">Enroll Now</button>
+                            <button class="btn btn-outline">Learn More</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Course Card 2 -->
+                <div class="course-card">
+                    <img src="https://via.placeholder.com/300x200" alt="Course Image">
+                    <div class="course-content">
+                        <span class="course-category">Data Science</span>
+                        <h3>Data Science Fundamentals</h3>
+                        <p>Learn the fundamentals of data science, including Python, statistics, and machine learning basics.</p>
+                        <div class="course-meta">
+                            <span><i class="fas fa-signal"></i> Intermediate</span>
+                            <span><i class="fas fa-clock"></i> 10 weeks</span>
+                            <span><i class="fas fa-dollar-sign"></i> $249</span>
+                        </div>
+                        <div class="course-actions">
+                            <button class="btn btn-primary">Enroll Now</button>
+                            <button class="btn btn-outline">Learn More</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Course Card 3 -->
+                <div class="course-card">
+                    <img src="https://via.placeholder.com/300x200" alt="Course Image">
+                    <div class="course-content">
+                        <span class="course-category">Design</span>
+                        <h3>UI/UX Design Masterclass</h3>
+                        <p>Master the art of user interface and experience design with industry best practices.</p>
+                        <div class="course-meta">
+                            <span><i class="fas fa-signal"></i> Beginner</span>
+                            <span><i class="fas fa-clock"></i> 8 weeks</span>
+                            <span><i class="fas fa-dollar-sign"></i> $179</span>
+                        </div>
+                        <div class="course-actions">
+                            <button class="btn btn-primary">Enroll Now</button>
+                            <button class="btn btn-outline">Learn More</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Course Card 4 -->
+                <div class="course-card">
+                    <img src="https://via.placeholder.com/300x200" alt="Course Image">
+                    <div class="course-content">
+                        <span class="course-category">Marketing</span>
+                        <h3>Digital Marketing Strategy</h3>
+                        <p>Learn comprehensive digital marketing strategies including SEO, social media, and content marketing.</p>
+                        <div class="course-meta">
+                            <span><i class="fas fa-signal"></i> Intermediate</span>
+                            <span><i class="fas fa-clock"></i> 10 weeks</span>
+                            <span><i class="fas fa-dollar-sign"></i> $199</span>
+                        </div>
+                        <div class="course-actions">
+                            <button class="btn btn-primary">Enroll Now</button>
+                            <button class="btn btn-outline">Learn More</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Course Card 5 -->
+                <div class="course-card">
+                    <img src="https://via.placeholder.com/300x200" alt="Course Image">
+                    <div class="course-content">
+                        <span class="course-category">Development</span>
+                        <h3>Mobile App Development</h3>
+                        <p>Build cross-platform mobile applications using React Native and modern development tools.</p>
+                        <div class="course-meta">
+                            <span><i class="fas fa-signal"></i> Intermediate</span>
+                            <span><i class="fas fa-clock"></i> 12 weeks</span>
+                            <span><i class="fas fa-dollar-sign"></i> $249</span>
+                        </div>
+                        <div class="course-actions">
+                            <button class="btn btn-primary">Enroll Now</button>
+                            <button class="btn btn-outline">Learn More</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Course Card 6 -->
+                <div class="course-card">
+                    <img src="https://via.placeholder.com/300x200" alt="Course Image">
+                    <div class="course-content">
+                        <span class="course-category">Business</span>
+                        <h3>Project Management Professional</h3>
+                        <p>Prepare for PMP certification with comprehensive project management training.</p>
+                        <div class="course-meta">
+                            <span><i class="fas fa-signal"></i> Advanced</span>
+                            <span><i class="fas fa-clock"></i> 16 weeks</span>
+                            <span><i class="fas fa-dollar-sign"></i> $299</span>
+                        </div>
+                        <div class="course-actions">
+                            <button class="btn btn-primary">Enroll Now</button>
+                            <button class="btn btn-outline">Learn More</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Course Card 7 -->
+                <div class="course-card">
+                    <img src="https://via.placeholder.com/300x200" alt="Course Image">
+                    <div class="course-content">
+                        <span class="course-category">Design</span>
+                        <h3>Graphic Design Fundamentals</h3>
+                        <p>Learn the basics of graphic design including typography, color theory, and layout.</p>
+                        <div class="course-meta">
+                            <span><i class="fas fa-signal"></i> Beginner</span>
+                            <span><i class="fas fa-clock"></i> 8 weeks</span>
+                            <span><i class="fas fa-dollar-sign"></i> $149</span>
+                        </div>
+                        <div class="course-actions">
+                            <button class="btn btn-primary">Enroll Now</button>
+                            <button class="btn btn-outline">Learn More</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Course Card 8 -->
+                <div class="course-card">
+                    <img src="https://via.placeholder.com/300x200" alt="Course Image">
+                    <div class="course-content">
+                        <span class="course-category">Data Science</span>
+                        <h3>Machine Learning & AI</h3>
+                        <p>Advanced course in machine learning and artificial intelligence applications.</p>
+                        <div class="course-meta">
+                            <span><i class="fas fa-signal"></i> Advanced</span>
+                            <span><i class="fas fa-clock"></i> 14 weeks</span>
+                            <span><i class="fas fa-dollar-sign"></i> $349</span>
+                        </div>
+                        <div class="course-actions">
+                            <button class="btn btn-primary">Enroll Now</button>
+                            <button class="btn btn-outline">Learn More</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Talents Section -->
+    <section id="talents" class="talents">
+        <div class="container">
+            <h2>Featured Talents</h2>
+            <div class="filter-row">
+                <div class="filter-group">
+                    <select class="filter-select">
+                        <option value="">All Skills</option>
+                        <option value="development">Development</option>
+                        <option value="design">Design</option>
+                        <option value="marketing">Marketing</option>
+                        <option value="data">Data Science</option>
+                        <option value="product">Product</option>
+                    </select>
+                    <select class="filter-select">
+                        <option value="">Experience Level</option>
+                        <option value="entry">Entry Level</option>
+                        <option value="mid">Mid Level</option>
+                        <option value="senior">Senior Level</option>
+                        <option value="expert">Expert</option>
+                    </select>
+                    <select class="filter-select">
+                        <option value="">Availability</option>
+                        <option value="available">Available Now</option>
+                        <option value="soon">Available Soon</option>
+                        <option value="busy">Currently Busy</option>
+                    </select>
+                </div>
+                <div class="filter-actions">
+                    <button class="btn btn-outline" onclick="resetFilters()">Reset</button>
+                    <button class="btn btn-primary" onclick="applyFilters()">Apply Filters</button>
+                </div>
+            </div>
+            <div class="talents-grid">
+                <!-- Talent Card 1 -->
+                <div class="talent-card">
+                    <div class="availability-status status-available">Available Now</div>
+                    <div class="talent-header">
+                        <img src="https://via.placeholder.com/100" alt="Talent Photo" class="talent-photo">
+                        <div class="talent-info">
+                            <h3>Sarah Johnson</h3>
+                            <p>UI/UX Designer</p>
+                        </div>
+                    </div>
+                    <div class="talent-stats">
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                            <span>4.5</span>
+                        </div>
+                        <div class="projects">
+                            <i class="fas fa-briefcase"></i>
+                            <span>24 Projects</span>
+                        </div>
+                        <div class="experience">
+                            <i class="fas fa-clock"></i>
+                            <span>5 Years</span>
+                        </div>
+                    </div>
+                    <p class="talent-description">Experienced UI/UX designer with a passion for creating beautiful and functional user interfaces. Specializing in user research, wireframing, and creating intuitive designs that enhance user experience.</p>
+                    <button class="read-more-btn">Read More</button>
+                    <div class="talent-tags">
+                        <span>UI Design</span>
+                        <span>UX Research</span>
+                        <span>Figma</span>
+                        <span>Adobe XD</span>
+                    </div>
+                    <div class="talent-actions">
+                        <button class="btn btn-outline">View Profile</button>
+                        <button class="btn btn-primary">Book Appointment</button>
+                    </div>
+                </div>
+
+                <!-- Talent Card 2 -->
+                <div class="talent-card">
+                    <div class="availability-status status-busy">Currently Busy</div>
+                    <div class="talent-header">
+                        <img src="https://via.placeholder.com/100" alt="Talent Photo" class="talent-photo">
+                        <div class="talent-info">
+                            <h3>Michael Chen</h3>
+                            <p>Full Stack Developer</p>
+                        </div>
+                    </div>
+                    <div class="talent-stats">
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <span>5.0</span>
+                        </div>
+                        <div class="projects">
+                            <i class="fas fa-briefcase"></i>
+                            <span>32 Projects</span>
+                        </div>
+                        <div class="experience">
+                            <i class="fas fa-clock"></i>
+                            <span>7 Years</span>
+                        </div>
+                    </div>
+                    <p class="talent-description">Expert full stack developer specializing in modern web technologies and cloud solutions.</p>
+                    <div class="talent-tags">
+                        <span>React</span>
+                        <span>Node.js</span>
+                        <span>AWS</span>
+                        <span>MongoDB</span>
+                    </div>
+                    <div class="talent-actions">
+                        <button class="btn btn-outline">View Profile</button>
+                        <button class="btn btn-primary">Contact</button>
+                    </div>
+                </div>
+
+                <!-- Talent Card 3 -->
+                <div class="talent-card">
+                    <div class="availability-status status-soon">Available Soon</div>
+                    <div class="talent-header">
+                        <img src="https://via.placeholder.com/100" alt="Talent Photo" class="talent-photo">
+                        <div class="talent-info">
+                            <h3>Emma Davis</h3>
+                            <p>Data Scientist</p>
+                        </div>
+                    </div>
+                    <div class="talent-stats">
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <span>5.0</span>
+                        </div>
+                        <div class="projects">
+                            <i class="fas fa-briefcase"></i>
+                            <span>18 Projects</span>
+                        </div>
+                        <div class="experience">
+                            <i class="fas fa-clock"></i>
+                            <span>4 Years</span>
+                        </div>
+                    </div>
+                    <p class="talent-description">Data scientist with expertise in machine learning and predictive analytics.</p>
+                    <div class="talent-tags">
+                        <span>Python</span>
+                        <span>Machine Learning</span>
+                        <span>Data Analysis</span>
+                        <span>SQL</span>
+                    </div>
+                    <div class="talent-actions">
+                        <button class="btn btn-outline">View Profile</button>
+                        <button class="btn btn-primary">Contact</button>
+                    </div>
+                </div>
+
+                <!-- Talent Card 4 -->
+                <div class="talent-card">
+                    <div class="availability-status status-busy">Currently Busy</div>
+                    <div class="talent-header">
+                        <img src="https://via.placeholder.com/100" alt="Talent Photo" class="talent-photo">
+                        <div class="talent-info">
+                            <h3>David Wilson</h3>
+                            <p>Product Manager</p>
+                        </div>
+                    </div>
+                    <div class="talent-stats">
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <span>5.0</span>
+                        </div>
+                        <div class="projects">
+                            <i class="fas fa-briefcase"></i>
+                            <span>15 Projects</span>
+                        </div>
+                        <div class="experience">
+                            <i class="fas fa-clock"></i>
+                            <span>6 Years</span>
+                        </div>
+                    </div>
+                    <p class="talent-description">Strategic product manager with a track record of successful product launches.</p>
+                    <div class="talent-tags">
+                        <span>Product Strategy</span>
+                        <span>Agile</span>
+                        <span>User Research</span>
+                        <span>Analytics</span>
+                    </div>
+                    <div class="talent-actions">
+                        <button class="btn btn-outline">View Profile</button>
+                        <button class="btn btn-primary">Contact</button>
+                    </div>
+                </div>
+
+                <!-- Talent Card 5 -->
+                <div class="talent-card">
+                    <div class="availability-status status-available">Available Now</div>
+                    <div class="talent-header">
+                        <img src="https://via.placeholder.com/100" alt="Talent Photo" class="talent-photo">
+                        <div class="talent-info">
+                            <h3>Lisa Anderson</h3>
+                            <p>Marketing Director</p>
+                        </div>
+                    </div>
+                    <div class="talent-stats">
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <span>5.0</span>
+                        </div>
+                        <div class="projects">
+                            <i class="fas fa-briefcase"></i>
+                            <span>20 Projects</span>
+                        </div>
+                        <div class="experience">
+                            <i class="fas fa-clock"></i>
+                            <span>8 Years</span>
+                        </div>
+                    </div>
+                    <p class="talent-description">Experienced marketing director with expertise in digital and traditional marketing.</p>
+                    <div class="talent-tags">
+                        <span>Digital Marketing</span>
+                        <span>Brand Strategy</span>
+                        <span>Content Marketing</span>
+                        <span>SEO</span>
+                    </div>
+                    <div class="talent-actions">
+                        <button class="btn btn-outline">View Profile</button>
+                        <button class="btn btn-primary">Contact</button>
+                    </div>
+                </div>
+
+                <!-- Talent Card 6 -->
+                <div class="talent-card">
+                    <div class="availability-status status-busy">Currently Busy</div>
+                    <div class="talent-header">
+                        <img src="https://via.placeholder.com/100" alt="Talent Photo" class="talent-photo">
+                        <div class="talent-info">
+                            <h3>James Brown</h3>
+                            <p>DevOps Engineer</p>
+                        </div>
+                    </div>
+                    <div class="talent-stats">
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <span>5.0</span>
+                        </div>
+                        <div class="projects">
+                            <i class="fas fa-briefcase"></i>
+                            <span>28 Projects</span>
+                        </div>
+                        <div class="experience">
+                            <i class="fas fa-clock"></i>
+                            <span>6 Years</span>
+                        </div>
+                    </div>
+                    <p class="talent-description">DevOps expert specializing in cloud infrastructure and automation.</p>
+                    <div class="talent-tags">
+                        <span>AWS</span>
+                        <span>Kubernetes</span>
+                        <span>Docker</span>
+                        <span>CI/CD</span>
+                    </div>
+                    <div class="talent-actions">
+                        <button class="btn btn-outline">View Profile</button>
+                        <button class="btn btn-primary">Contact</button>
+                    </div>
+                </div>
+
+                <!-- Talent Card 7 -->
+                <div class="talent-card">
+                    <div class="availability-status status-soon">Available Soon</div>
+                    <div class="talent-header">
+                        <img src="https://via.placeholder.com/100" alt="Talent Photo" class="talent-photo">
+                        <div class="talent-info">
+                            <h3>Sophie Chen</h3>
+                            <p>Mobile Developer</p>
+                        </div>
+                    </div>
+                    <div class="talent-stats">
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <span>5.0</span>
+                        </div>
+                        <div class="projects">
+                            <i class="fas fa-briefcase"></i>
+                            <span>22 Projects</span>
+                        </div>
+                        <div class="experience">
+                            <i class="fas fa-clock"></i>
+                            <span>5 Years</span>
+                        </div>
+                    </div>
+                    <p class="talent-description">Mobile app developer specializing in iOS and Android development.</p>
+                    <div class="talent-tags">
+                        <span>React Native</span>
+                        <span>iOS</span>
+                        <span>Android</span>
+                        <span>Swift</span>
+                    </div>
+                    <div class="talent-actions">
+                        <button class="btn btn-outline">View Profile</button>
+                        <button class="btn btn-primary">Contact</button>
+                    </div>
+                </div>
+
+                <!-- Talent Card 8 -->
+                <div class="talent-card">
+                    <div class="availability-status status-available">Available Now</div>
+                    <div class="talent-header">
+                        <img src="https://via.placeholder.com/100" alt="Talent Photo" class="talent-photo">
+                        <div class="talent-info">
+                            <h3>Alex Thompson</h3>
+                            <p>AI/ML Engineer</p>
+                        </div>
+                    </div>
+                    <div class="talent-stats">
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <span>5.0</span>
+                        </div>
+                        <div class="projects">
+                            <i class="fas fa-briefcase"></i>
+                            <span>16 Projects</span>
+                        </div>
+                        <div class="experience">
+                            <i class="fas fa-clock"></i>
+                            <span>4 Years</span>
+                        </div>
+                    </div>
+                    <p class="talent-description">AI/ML engineer with expertise in deep learning and neural networks.</p>
+                    <div class="talent-tags">
+                        <span>Python</span>
+                        <span>TensorFlow</span>
+                        <span>PyTorch</span>
+                        <span>Deep Learning</span>
+                    </div>
+                    <div class="talent-actions">
+                        <button class="btn btn-outline">View Profile</button>
+                        <button class="btn btn-primary">Contact</button>
+                    </div>
+                </div>
+
+                <!-- Talent Card 9 -->
+                <div class="talent-card">
+                    <div class="availability-status status-available">Available Now</div>
+                    <div class="talent-header">
+                        <img src="https://via.placeholder.com/100" alt="Talent Photo" class="talent-photo">
+                        <div class="talent-info">
+                            <h3>Rachel Kim</h3>
+                            <p>Frontend Developer</p>
+                        </div>
+                    </div>
+                    <div class="talent-stats">
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <span>5.0</span>
+                        </div>
+                        <div class="projects">
+                            <i class="fas fa-briefcase"></i>
+                            <span>19 Projects</span>
+                        </div>
+                        <div class="experience">
+                            <i class="fas fa-clock"></i>
+                            <span>3 Years</span>
+                        </div>
+                    </div>
+                    <p class="talent-description">Frontend developer specializing in React and modern web technologies.</p>
+                    <div class="talent-tags">
+                        <span>React</span>
+                        <span>Vue.js</span>
+                        <span>TypeScript</span>
+                        <span>CSS3</span>
+                    </div>
+                    <div class="talent-actions">
+                        <button class="btn btn-outline">View Profile</button>
+                        <button class="btn btn-primary">Book Appointment</button>
+                    </div>
+                </div>
+
+                <!-- Talent Card 10 -->
+                <div class="talent-card">
+                    <div class="availability-status status-busy">Currently Busy</div>
+                    <div class="talent-header">
+                        <img src="https://via.placeholder.com/100" alt="Talent Photo" class="talent-photo">
+                        <div class="talent-info">
+                            <h3>Tom Martinez</h3>
+                            <p>Backend Developer</p>
+                        </div>
+                    </div>
+                    <div class="talent-stats">
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                            <span>4.5</span>
+                        </div>
+                        <div class="projects">
+                            <i class="fas fa-briefcase"></i>
+                            <span>25 Projects</span>
+                        </div>
+                        <div class="experience">
+                            <i class="fas fa-clock"></i>
+                            <span>5 Years</span>
+                        </div>
+                    </div>
+                    <p class="talent-description">Backend developer with expertise in Node.js and cloud technologies.</p>
+                    <div class="talent-tags">
+                        <span>Node.js</span>
+                        <span>Python</span>
+                        <span>AWS</span>
+                        <span>MongoDB</span>
+                    </div>
+                    <div class="talent-actions">
+                        <button class="btn btn-outline">View Profile</button>
+                        <button class="btn btn-primary">Book Appointment</button>
+                    </div>
+                </div>
+
+                <!-- Talent Card 11 -->
+                <div class="talent-card">
+                    <div class="availability-status status-soon">Available Soon</div>
+                    <div class="talent-header">
+                        <img src="https://via.placeholder.com/100" alt="Talent Photo" class="talent-photo">
+                        <div class="talent-info">
+                            <h3>Nina Patel</h3>
+                            <p>UX Researcher</p>
+                        </div>
+                    </div>
+                    <div class="talent-stats">
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <span>5.0</span>
+                        </div>
+                        <div class="projects">
+                            <i class="fas fa-briefcase"></i>
+                            <span>16 Projects</span>
+                        </div>
+                        <div class="experience">
+                            <i class="fas fa-clock"></i>
+                            <span>4 Years</span>
+                        </div>
+                    </div>
+                    <p class="talent-description">UX researcher specializing in user behavior and interaction design.</p>
+                    <div class="talent-tags">
+                        <span>User Research</span>
+                        <span>Usability Testing</span>
+                        <span>Analytics</span>
+                        <span>Prototyping</span>
+                    </div>
+                    <div class="talent-actions">
+                        <button class="btn btn-outline">View Profile</button>
+                        <button class="btn btn-primary">Book Appointment</button>
+                    </div>
+                </div>
+
+                <!-- Talent Card 12 -->
+                <div class="talent-card">
+                    <div class="availability-status status-available">Available Now</div>
+                    <div class="talent-header">
+                        <img src="https://via.placeholder.com/100" alt="Talent Photo" class="talent-photo">
+                        <div class="talent-info">
+                            <h3>Carlos Rodriguez</h3>
+                            <p>Security Engineer</p>
+                        </div>
+                    </div>
+                    <div class="talent-stats">
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <span>5.0</span>
+                        </div>
+                        <div class="projects">
+                            <i class="fas fa-briefcase"></i>
+                            <span>21 Projects</span>
+                        </div>
+                        <div class="experience">
+                            <i class="fas fa-clock"></i>
+                            <span>6 Years</span>
+                        </div>
+                    </div>
+                    <p class="talent-description">Security engineer with expertise in cybersecurity and threat detection.</p>
+                    <div class="talent-tags">
+                        <span>Cybersecurity</span>
+                        <span>Penetration Testing</span>
+                        <span>Network Security</span>
+                        <span>Compliance</span>
+                    </div>
+                    <div class="talent-actions">
+                        <button class="btn btn-outline">View Profile</button>
+                        <button class="btn btn-primary">Book Appointment</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bottom Banner -->
+    <section class="bottom-banner">
+        <div class="container">
+            <div class="banner-content">
+                <div class="banner-text">
+                    <h2>Ready to Start Your Journey?</h2>
+                    <p>Join thousands of professionals who have found their dream jobs and courses on Crimble.</p>
+                    <div class="banner-stats">
+                        <div class="stat-item">
+                            <span class="stat-number">10K+</span>
+                            <span class="stat-label">Active Users</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">5K+</span>
+                            <span class="stat-label">Job Matches</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">2K+</span>
+                            <span class="stat-label">Course Enrollments</span>
+                        </div>
+                    </div>
+                    <div class="banner-actions">
+                        <button class="btn btn-primary">Get Started</button>
+                        <button class="btn btn-outline">Learn More</button>
+                    </div>
+                </div>
+                <div class="banner-image">
+                    <img src="https://via.placeholder.com/500x300" alt="Success Stories">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <img src="https://via.placeholder.com/40" alt="Crimble Logo">
+                        <span>Crimble</span>
+                    </div>
+                    <p class="footer-description">Connecting talented professionals with amazing opportunities. Your next career move starts here.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>For Job Seekers</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Browse Jobs</a></li>
+                        <li><a href="#">Career Resources</a></li>
+                        <li><a href="#">Salary Guide</a></li>
+                        <li><a href="#">Interview Tips</a></li>
+                        <li><a href="#">Resume Builder</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>For Employers</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Post a Job</a></li>
+                        <li><a href="#">Talent Solutions</a></li>
+                        <li><a href="#">Recruitment Tools</a></li>
+                        <li><a href="#">Employer Resources</a></li>
+                        <li><a href="#">Pricing Plans</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Learning</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Browse Courses</a></li>
+                        <li><a href="#">Skill Assessments</a></li>
+                        <li><a href="#">Learning Paths</a></li>
+                        <li><a href="#">Certifications</a></li>
+                        <li><a href="#">Student Discounts</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Company</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Press</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-bottom-content">
+                    <p>&copy; 2024 Crimble. All rights reserved.</p>
+                    <div class="footer-bottom-links">
+                        <a href="#">Privacy Policy</a>
+                        <a href="#">Terms of Service</a>
+                        <a href="#">Cookie Policy</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeLoginModal()">&times;</span>
+            <h2>Sign In</h2>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="loginEmail">Email</label>
+                    <input type="email" id="loginEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Password</label>
+                    <input type="password" id="loginPassword" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Sign In</button>
+            </form>
+            <p style="margin-top: 15px; text-align: center;">
+                Don't have an account? <a href="#" onclick="showSignupModal()">Sign Up</a>
+            </p>
+        </div>
+    </div>
+
+    <!-- Signup Modal -->
+    <div id="signupModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeSignupModal()">&times;</span>
+            <h2>Create Account</h2>
+            <form id="signupForm">
+                <div class="form-group">
+                    <label for="signupName">Full Name</label>
+                    <input type="text" id="signupName" required>
+                </div>
+                <div class="form-group">
+                    <label for="signupEmail">Email</label>
+                    <input type="email" id="signupEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="signupPassword">Password</label>
+                    <input type="password" id="signupPassword" required>
+                </div>
+                <div class="form-group">
+                    <label for="signupConfirmPassword">Confirm Password</label>
+                    <input type="password" id="signupConfirmPassword" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Sign Up</button>
+            </form>
+            <p style="margin-top: 15px; text-align: center;">
+                Already have an account? <a href="#" onclick="showLoginModal()">Sign In</a>
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // Modal Functions
+        function showLoginModal() {
+            document.getElementById('loginModal').style.display = 'flex';
+        }
+
+        function closeLoginModal() {
+            document.getElementById('loginModal').style.display = 'none';
+        }
+
+        function showSignupModal(role) {
+            const modal = document.getElementById('signupModal');
+            const roleInput = document.createElement('input');
+            roleInput.type = 'hidden';
+            roleInput.name = 'role';
+            roleInput.value = role;
+            document.getElementById('signupForm').appendChild(roleInput);
+            modal.style.display = 'flex';
+        }
+
+        function closeSignupModal() {
+            document.getElementById('signupModal').style.display = 'none';
+        }
+
+        // Close modals when clicking outside
+        window.onclick = function(event) {
+            if (event.target.className === 'modal') {
+                event.target.style.display = 'none';
+            }
+        }
+
+        // Form Submission
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+            
+            // Simple validation for demo purposes
+            if (email === 'admin@crimble.com' && password === 'admin123') {
+                window.location.href = 'admin.html';
+            } else {
+                alert('Invalid credentials. Please try again.');
+            }
+        });
+
+        document.getElementById('signupForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const name = document.getElementById('signupName').value;
+            const email = document.getElementById('signupEmail').value;
+            const password = document.getElementById('signupPassword').value;
+            const confirmPassword = document.getElementById('signupConfirmPassword').value;
+
+            if (password !== confirmPassword) {
+                alert('Passwords do not match!');
+                return;
+            }
+
+            // Add your signup logic here
+            console.log('Signup attempt:', { name, email, password });
+            alert('Signup functionality will be implemented here');
+        });
+
+        // Filter Functions
+        function applyFilters() {
+            // Add your filter logic here
+            console.log('Applying filters...');
+        }
+
+        function resetFilters() {
+            const selects = document.querySelectorAll('.filter-select');
+            selects.forEach(select => {
+                select.value = '';
+            });
+            console.log('Filters reset...');
+        }
+
+        // Add smooth scroll for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Read More Functionality
+        document.querySelectorAll('.read-more-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const description = this.previousElementSibling;
+                description.classList.toggle('expanded');
+                this.textContent = description.classList.contains('expanded') ? 'Read Less' : 'Read More';
+            });
+        });
+
+        // Add JavaScript for search tabs
+        document.querySelectorAll('.search-tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                document.querySelectorAll('.search-tab').forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>
+
+
+

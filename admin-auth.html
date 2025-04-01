@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login - Crimble</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+    <style>
+        :root {
+            --primary-color: #2e7d32;
+            --secondary-color: #43a047;
+            --text-color: #333;
+            --light-gray: #f8f9fa;
+            --border-color: #e0e0e0;
+            --error-color: #dc3545;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #1a237e 0%, #0d47a1 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .admin-container {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            width: 100%;
+            max-width: 400px;
+            padding: 40px;
+            margin: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .admin-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--primary-color);
+        }
+
+        .admin-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .admin-header h1 {
+            color: var(--primary-color);
+            margin: 0;
+            font-size: 28px;
+            font-weight: 700;
+        }
+
+        .admin-header p {
+            color: #666;
+            margin: 10px 0 0;
+            font-size: 14px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--text-color);
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            box-sizing: border-box;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.1);
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 14px;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-submit:hover {
+            background: var(--secondary-color);
+            transform: translateY(-2px);
+        }
+
+        .btn-submit:active {
+            transform: translateY(0);
+        }
+
+        .error-message {
+            color: var(--error-color);
+            font-size: 14px;
+            margin-top: 5px;
+            display: none;
+        }
+
+        .security-features {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .security-features p {
+            font-size: 12px;
+            color: #666;
+            margin: 5px 0;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .security-features p::before {
+            content: '✓';
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+
+        .two-factor {
+            display: none;
+            margin-top: 20px;
+        }
+
+        .two-factor.show {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-container">
+        <div class="admin-header">
+            <h1>Admin Portal</h1>
+            <p>Secure access for administrators only</p>
+        </div>
+
+        <form id="adminForm" onsubmit="handleSubmit(event)">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" required autocomplete="off">
+                <div class="error-message" id="usernameError"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" required>
+                <div class="error-message" id="passwordError"></div>
+            </div>
+
+            <div class="two-factor" id="twoFactorSection">
+                <div class="form-group">
+                    <label for="twoFactorCode">Two-Factor Authentication Code</label>
+                    <input type="text" id="twoFactorCode" maxlength="6" pattern="[0-9]{6}">
+                    <div class="error-message" id="twoFactorError"></div>
+                </div>
+            </div>
+
+            <button type="submit" class="btn-submit">Login</button>
+        </form>
+
+        <div class="security-features">
+            <p>Secure HTTPS connection</p>
+            <p>Two-factor authentication</p>
+            <p>Session timeout protection</p>
+            <p>IP-based access control</p>
+        </div>
+    </div>
+
+    <script>
+        let isTwoFactorRequired = false;
+
+        function handleSubmit(event) {
+            event.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const twoFactorCode = document.getElementById('twoFactorCode').value;
+
+            if (!isTwoFactorRequired) {
+                // Simulate first step of authentication
+                if (username === 'admin' && password === 'admin123') {
+                    isTwoFactorRequired = true;
+                    document.getElementById('twoFactorSection').classList.add('show');
+                    document.querySelector('.btn-submit').textContent = 'Verify Code';
+                } else {
+                    showError('usernameError', 'Invalid credentials');
+                }
+            } else {
+                // Simulate two-factor verification
+                if (twoFactorCode === '123456') {
+                    alert('Admin login successful!');
+                    // Here you would typically redirect to the admin dashboard
+                } else {
+                    showError('twoFactorError', 'Invalid verification code');
+                }
+            }
+        }
+
+        function showError(elementId, message) {
+            const errorElement = document.getElementById(elementId);
+            errorElement.textContent = message;
+            errorElement.style.display = 'block';
+            setTimeout(() => {
+                errorElement.style.display = 'none';
+            }, 3000);
+        }
+
+        // Demo credentials:
+        // Username: admin
+        // Password: admin123
+        // 2FA Code: 123456
+    </script>
+</body>
+</html> 

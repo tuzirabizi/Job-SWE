@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Builder - Crimble</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2e7d32;
+            --secondary-color: #43a047;
+            --text-color: #333;
+            --light-gray: #f8f9fa;
+            --border-color: #e0e0e0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--light-gray);
+            color: var(--text-color);
+        }
+
+        .resume-builder {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            min-height: 100vh;
+            padding: 20px;
+            gap: 20px;
+        }
+
+        /* Form Panel Styles */
+        .form-panel {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            height: fit-content;
+        }
+
+        .form-section {
+            margin-bottom: 30px;
+        }
+
+        .form-section h3 {
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        .form-group textarea {
+            height: 100px;
+            resize: vertical;
+        }
+
+        .form-array {
+            margin-bottom: 15px;
+        }
+
+        .form-array-item {
+            background-color: var(--light-gray);
+            padding: 15px;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+
+        .form-array-item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .btn {
+            padding: 8px 15px;
+            border-radius: 4px;
+            border: none;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--secondary-color);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 1px solid var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .btn-danger {
+            background-color: #dc3545;
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background-color: #c82333;
+        }
+
+        /* Preview Panel Styles */
+        .preview-panel {
+            background-color: white;
+            border-radius: 10px;
+            padding: 40px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .preview-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .template-selector {
+            display: flex;
+            gap: 10px;
+        }
+
+        .template-btn {
+            padding: 8px 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .template-btn.active {
+            background-color: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+
+        .preview-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        /* Resume Preview Styles */
+        .resume-preview {
+            background-color: white;
+            padding: 40px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        /* Modern Template */
+        .template-modern {
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .template-modern .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .template-modern .name {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .template-modern .contact {
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .template-modern .section {
+            margin-bottom: 25px;
+        }
+
+        .template-modern .section-title {
+            font-size: 20px;
+            font-weight: 500;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            padding-bottom: 5px;
+            border-bottom: 2px solid var(--primary-color);
+        }
+
+        .template-modern .experience-item {
+            margin-bottom: 20px;
+        }
+
+        .template-modern .experience-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+        }
+
+        .template-modern .company {
+            font-weight: 500;
+        }
+
+        .template-modern .date {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .template-modern .position {
+            color: var(--primary-color);
+            margin-bottom: 5px;
+        }
+
+        .template-modern .description {
+            color: #666;
+            font-size: 14px;
+        }
+
+        /* Classic Template */
+        .template-classic {
+            font-family: 'Times New Roman', serif;
+        }
+
+        .template-classic .header {
+            text-align: left;
+            margin-bottom: 30px;
+        }
+
+        .template-classic .name {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .template-classic .contact {
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .template-classic .section {
+            margin-bottom: 25px;
+        }
+
+        .template-classic .section-title {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Minimal Template */
+        .template-minimal {
+            font-family: 'Helvetica Neue', sans-serif;
+        }
+
+        .template-minimal .header {
+            text-align: left;
+            margin-bottom: 30px;
+        }
+
+        .template-minimal .name {
+            font-size: 24px;
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+
+        .template-minimal .contact {
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .template-minimal .section {
+            margin-bottom: 25px;
+        }
+
+        .template-minimal .section-title {
+            font-size: 16px;
+            font-weight: 500;
+            margin-bottom: 15px;
+            color: #666;
+        }
+
+        /* Professional Template */
+        .template-professional {
+            font-family: 'Arial', sans-serif;
+        }
+
+        .template-professional .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid var(--primary-color);
+        }
+
+        .template-professional .name {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .template-professional .contact {
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .template-professional .section {
+            margin-bottom: 25px;
+        }
+
+        .template-professional .section-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+    </style>
+</head>
+<body>
+    <div class="resume-builder">
+        <!-- Form Panel -->
+        <div class="form-panel">
+            <div class="form-section">
+                <h3>Personal Information</h3>
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" id="fullName" placeholder="John Doe">
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" id="email" placeholder="john.doe@example.com">
+                </div>
+                <div class="form-group">
+                    <label>Phone</label>
+                    <input type="tel" id="phone" placeholder="+1 234 567 8900">
+                </div>
+                <div class="form-group">
+                    <label>Location</label>
+                    <input type="text" id="location" placeholder="City, Country">
+                </div>
+                <div class="form-group">
+                    <label>Summary</label>
+                    <textarea id="summary" placeholder="Brief professional summary"></textarea>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h3>Education</h3>
+                <div class="form-array" id="educationArray">
+                    <div class="form-array-item">
+                        <div class="form-array-item-header">
+                            <h4>Education Item</h4>
+                            <button class="btn btn-danger" onclick="removeEducation(this)">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                        <div class="form-group">
+                            <label>Institution</label>
+                            <input type="text" placeholder="University Name">
+                        </div>
+                        <div class="form-group">
+                            <label>Degree</label>
+                            <input type="text" placeholder="Bachelor's in Computer Science">
+                        </div>
+                        <div class="form-group">
+                            <label>Field</label>
+                            <input type="text" placeholder="Computer Science">
+                        </div>
+                        <div class="form-group">
+                            <label>Start Date</label>
+                            <input type="date">
+                        </div>
+                        <div class="form-group">
+                            <label>End Date</label>
+                            <input type="date">
+                        </div>
+                        <div class="form-group">
+                            <label>GPA</label>
+                            <input type="number" step="0.01" placeholder="3.8">
+                        </div>
+                    </div>
+                </div>
+                <button class="btn btn-outline" onclick="addEducation()">
+                    <i class="fas fa-plus"></i> Add Education
+                </button>
+            </div>
+
+            <div class="form-section">
+                <h3>Experience</h3>
+                <div class="form-array" id="experienceArray">
+                    <div class="form-array-item">
+                        <div class="form-array-item-header">
+                            <h4>Experience Item</h4>
+                            <button class="btn btn-danger" onclick="removeExperience(this)">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                        <div class="form-group">
+                            <label>Company</label>
+                            <input type="text" placeholder="Company Name">
+                        </div>
+                        <div class="form-group">
+                            <label>Position</label>
+                            <input type="text" placeholder="Job Title">
+                        </div>
+                        <div class="form-group">
+                            <label>Location</label>
+                            <input type="text" placeholder="City, Country">
+                        </div>
+                        <div class="form-group">
+                            <label>Start Date</label>
+                            <input type="date">
+                        </div>
+                        <div class="form-group">
+                            <label>End Date</label>
+                            <input type="date">
+                        </div>
+                        <div class="form-group">
+                            <label>Description</label>
+                            <textarea placeholder="Job responsibilities and achievements"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <button class="btn btn-outline" onclick="addExperience()">
+                    <i class="fas fa-plus"></i> Add Experience
+                </button>
+            </div>
+
+            <div class="form-section">
+                <h3>Skills</h3>
+                <div class="form-group">
+                    <label>Technical Skills</label>
+                    <input type="text" placeholder="e.g., JavaScript, Python, React">
+                </div>
+                <div class="form-group">
+                    <label>Soft Skills</label>
+                    <input type="text" placeholder="e.g., Leadership, Communication">
+                </div>
+                <div class="form-group">
+                    <label>Languages</label>
+                    <input type="text" placeholder="e.g., English (Native), Spanish (Intermediate)">
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h3>Projects</h3>
+                <div class="form-array" id="projectsArray">
+                    <div class="form-array-item">
+                        <div class="form-array-item-header">
+                            <h4>Project Item</h4>
+                            <button class="btn btn-danger" onclick="removeProject(this)">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                        <div class="form-group">
+                            <label>Project Name</label>
+                            <input type="text" placeholder="Project Name">
+                        </div>
+                        <div class="form-group">
+                            <label>Technologies</label>
+                            <input type="text" placeholder="e.g., React, Node.js, MongoDB">
+                        </div>
+                        <div class="form-group">
+                            <label>Description</label>
+                            <textarea placeholder="Project description and achievements"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>URL</label>
+                            <input type="url" placeholder="Project URL">
+                        </div>
+                    </div>
+                </div>
+                <button class="btn btn-outline" onclick="addProject()">
+                    <i class="fas fa-plus"></i> Add Project
+                </button>
+            </div>
+        </div>
+
+        <!-- Preview Panel -->
+        <div class="preview-panel">
+            <div class="preview-header">
+                <div class="template-selector">
+                    <button class="template-btn active" onclick="changeTemplate('modern')">Modern</button>
+                    <button class="template-btn" onclick="changeTemplate('classic')">Classic</button>
+                    <button class="template-btn" onclick="changeTemplate('minimal')">Minimal</button>
+                    <button class="template-btn" onclick="changeTemplate('professional')">Professional</button>
+                </div>
+                <div class="preview-actions">
+                    <button class="btn btn-outline">
+                        <i class="fas fa-download"></i> Download PDF
+                    </button>
+                    <button class="btn btn-primary">
+                        <i class="fas fa-save"></i> Save Resume
+                    </button>
+                </div>
+            </div>
+
+            <div class="resume-preview">
+                <div class="template-modern">
+                    <div class="header">
+                        <div class="name">John Doe</div>
+                        <div class="contact">
+                            john.doe@example.com | +1 234 567 8900 | New York, USA
+                        </div>
+                        <div class="summary">
+                            Passionate software developer with 5 years of experience in web development.
+                            Strong problem-solving skills and a track record of delivering high-quality solutions.
+                        </div>
+                    </div>
+
+                    <div class="section">
+                        <div class="section-title">Education</div>
+                        <div class="experience-item">
+                            <div class="experience-header">
+                                <div class="company">University of Technology</div>
+                                <div class="date">2015 - 2019</div>
+                            </div>
+                            <div class="position">Bachelor of Science in Computer Science</div>
+                            <div class="description">GPA: 3.8</div>
+                        </div>
+                    </div>
+
+                    <div class="section">
+                        <div class="section-title">Experience</div>
+                        <div class="experience-item">
+                            <div class="experience-header">
+                                <div class="company">Tech Solutions Inc.</div>
+                                <div class="date">2019 - Present</div>
+                            </div>
+                            <div class="position">Senior Software Engineer</div>
+                            <div class="description">
+                                Led development of multiple web applications using React and Node.js.
+                                Implemented new features and optimized performance.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="section">
+                        <div class="section-title">Skills</div>
+                        <div class="description">
+                            <strong>Technical:</strong> JavaScript, React, Node.js, Python, SQL<br>
+                            <strong>Soft Skills:</strong> Leadership, Communication, Problem Solving<br>
+                            <strong>Languages:</strong> English (Native), Spanish (Intermediate)
+                        </div>
+                    </div>
+
+                    <div class="section">
+                        <div class="section-title">Projects</div>
+                        <div class="experience-item">
+                            <div class="experience-header">
+                                <div class="company">E-commerce Platform</div>
+                                <div class="date">2022</div>
+                            </div>
+                            <div class="position">Full Stack Developer</div>
+                            <div class="description">
+                                Built a complete e-commerce platform using React, Node.js, and MongoDB.
+                                Implemented user authentication, product management, and payment integration.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Template switching
+        function changeTemplate(template) {
+            const templates = document.querySelectorAll('.template-btn');
+            templates.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            const preview = document.querySelector('.resume-preview');
+            preview.innerHTML = document.querySelector(`.template-${template}`).outerHTML;
+        }
+
+        // Form array management
+        function addEducation() {
+            const educationArray = document.getElementById('educationArray');
+            const newItem = educationArray.children[0].cloneNode(true);
+            newItem.querySelectorAll('input, textarea').forEach(input => input.value = '');
+            educationArray.appendChild(newItem);
+        }
+
+        function removeEducation(button) {
+            const educationArray = document.getElementById('educationArray');
+            if (educationArray.children.length > 1) {
+                button.closest('.form-array-item').remove();
+            }
+        }
+
+        function addExperience() {
+            const experienceArray = document.getElementById('experienceArray');
+            const newItem = experienceArray.children[0].cloneNode(true);
+            newItem.querySelectorAll('input, textarea').forEach(input => input.value = '');
+            experienceArray.appendChild(newItem);
+        }
+
+        function removeExperience(button) {
+            const experienceArray = document.getElementById('experienceArray');
+            if (experienceArray.children.length > 1) {
+                button.closest('.form-array-item').remove();
+            }
+        }
+
+        function addProject() {
+            const projectsArray = document.getElementById('projectsArray');
+            const newItem = projectsArray.children[0].cloneNode(true);
+            newItem.querySelectorAll('input, textarea').forEach(input => input.value = '');
+            projectsArray.appendChild(newItem);
+        }
+
+        function removeProject(button) {
+            const projectsArray = document.getElementById('projectsArray');
+            if (projectsArray.children.length > 1) {
+                button.closest('.form-array-item').remove();
+            }
+        }
+
+        // Real-time preview update
+        document.querySelectorAll('input, textarea').forEach(input => {
+            input.addEventListener('input', updatePreview);
+        });
+
+        function updatePreview() {
+            // Update preview content based on form values
+            const fullName = document.getElementById('fullName').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const location = document.getElementById('location').value;
+            const summary = document.getElementById('summary').value;
+
+            const preview = document.querySelector('.resume-preview');
+            preview.querySelector('.name').textContent = fullName || 'John Doe';
+            preview.querySelector('.contact').textContent = 
+                `${email || 'john.doe@example.com'} | ${phone || '+1 234 567 8900'} | ${location || 'New York, USA'}`;
+            preview.querySelector('.summary').textContent = summary || 
+                'Passionate software developer with 5 years of experience in web development. Strong problem-solving skills and a track record of delivering high-quality solutions.';
+        }
+    </script>
+</body>
+</html> 
