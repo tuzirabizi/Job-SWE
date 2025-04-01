@@ -37,6 +37,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
+// Serve static files
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname)));
+
 // Database connection
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/crimble', {
     useNewUrlParser: true,
@@ -104,4 +108,9 @@ app.use((err, req, res, next) => {
     message: 'Something went wrong!',
     error: process.env.NODE_ENV === 'development' ? err.message : undefined
   });
+});
+
+// Basic route
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'employer-dashboard.html'));
 }); 
