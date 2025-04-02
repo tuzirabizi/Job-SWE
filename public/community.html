@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crimble Community - Connect & Share</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2980b9;
+            --dark-color: #000000;
+            --light-color: #ffffff;
+            --text-color: #333333;
+            --border-color: #e0e0e0;
+            --background-color: #f4f6f8;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background: var(--background-color);
+        }
+
+        /* Header styles (same as index.html) */
+        .header {
+            background: var(--dark-color);
+            padding: 15px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* Community specific styles */
+        .community-container {
+            max-width: 1200px;
+            margin: 80px auto 0;
+            padding: 20px;
+            display: grid;
+            grid-template-columns: 300px 1fr 300px;
+            gap: 20px;
+        }
+
+        .community-sidebar {
+            background: var(--light-color);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 100px;
+        }
+
+        .dashboard-nav {
+            background: var(--background-color);
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+
+        .dashboard-nav h3 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+
+        .dashboard-links {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .dashboard-link {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px;
+            background: var(--light-color);
+            border-radius: 5px;
+            text-decoration: none;
+            color: var(--text-color);
+            transition: all 0.3s ease;
+        }
+
+        .dashboard-link:hover {
+            background: var(--primary-color);
+            color: var(--light-color);
+        }
+
+        .dashboard-link i {
+            font-size: 1.2em;
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 15px;
+            background: var(--light-color);
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .user-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 2px solid var(--primary-color);
+        }
+
+        .user-info h4 {
+            margin-bottom: 5px;
+            color: var(--dark-color);
+        }
+
+        .user-info p {
+            font-size: 0.9em;
+            color: #666;
+        }
+
+        .community-main {
+            background: var(--light-color);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .create-post {
+            background: var(--light-color);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .post-input {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            margin-bottom: 10px;
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .post-actions {
+            display: flex;
+            gap: 20px;
+            color: var(--text-color);
+        }
+
+        .post {
+            background: var(--light-color);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .post-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .post-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
+        .post-info {
+            flex: 1;
+        }
+
+        .post-author {
+            font-weight: 600;
+            color: var(--dark-color);
+        }
+
+        .post-time {
+            font-size: 12px;
+            color: #666;
+        }
+
+        .post-content {
+            margin-bottom: 15px;
+        }
+
+        .post-action {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .post-action:hover {
+            color: var(--primary-color);
+        }
+
+        .trending-topics {
+            background: var(--light-color);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .topic-item {
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .topic-item:last-child {
+            border-bottom: none;
+        }
+
+        .topic-tag {
+            display: inline-block;
+            padding: 5px 10px;
+            background: var(--background-color);
+            border-radius: 15px;
+            font-size: 14px;
+            color: var(--primary-color);
+            margin-bottom: 5px;
+        }
+
+        .topic-stats {
+            font-size: 12px;
+            color: #666;
+        }
+
+        .btn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--secondary-color);
+        }
+
+        .community-menu {
+            margin-top: 20px;
+        }
+
+        .menu-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px;
+            color: var(--text-color);
+            text-decoration: none;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .menu-item:hover {
+            background: var(--primary-color);
+            color: var(--light-color);
+        }
+
+        .menu-item.active {
+            background: var(--primary-color);
+            color: var(--light-color);
+        }
+
+        @media (max-width: 1024px) {
+            .community-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <a href="/" class="logo">
+                <img src="https://via.placeholder.com/40" alt="Crimble Logo">
+                <span>Crimble</span>
+            </a>
+            <nav class="nav-links">
+                <a href="/courses.html">Courses</a>
+                <a href="/jobs.html">Jobs</a>
+                <a href="/talents.html">Talents</a>
+                <a href="/community.html">Community</a>
+                <a href="/about.html">About Us</a>
+            </nav>
+            <div class="auth-buttons">
+                <button class="btn btn-outline" onclick="showLoginModal()">Log in</button>
+                <button class="btn btn-primary" onclick="showSignupModal()">Sign up</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Community Content -->
+    <div class="community-container">
+        <!-- Left Sidebar -->
+        <div class="community-sidebar">
+            <!-- User Profile -->
+            <div class="user-profile">
+                <img src="https://via.placeholder.com/50" alt="User Avatar" class="user-avatar">
+                <div class="user-info">
+                    <h4>Welcome, User!</h4>
+                    <p>Student | Web Developer</p>
+                </div>
+            </div>
+
+            <!-- Dashboard Navigation -->
+            <div class="dashboard-nav">
+                <h3>Your Dashboard</h3>
+                <div class="dashboard-links">
+                    <a href="/student-dashboard.html" class="dashboard-link">
+                        <i class="fas fa-graduation-cap"></i>
+                        Student Dashboard
+                    </a>
+                </div>
+            </div>
+
+            <!-- Community Menu -->
+            <div class="community-menu">
+                <a href="#" class="menu-item active">
+                    <i class="fas fa-home"></i>
+                    Feed
+                </a>
+                <a href="#" class="menu-item">
+                    <i class="fas fa-video"></i>
+                    Videos
+                </a>
+                <a href="#" class="menu-item">
+                    <i class="fas fa-chart-line"></i>
+                    Trends
+                </a>
+                <a href="#" class="menu-item">
+                    <i class="fas fa-user-friends"></i>
+                    Connect
+                </a>
+                <a href="#" class="menu-item">
+                    <i class="fas fa-envelope"></i>
+                    Messages
+                </a>
+                <a href="#" class="menu-item">
+                    <i class="fas fa-bell"></i>
+                    Notifications
+                </a>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="community-main">
+            <!-- Create Post -->
+            <div class="create-post">
+                <textarea class="post-input" placeholder="Share your thoughts..."></textarea>
+                <div class="post-actions">
+                    <button class="btn btn-primary">Post</button>
+                </div>
+            </div>
+
+            <!-- Posts Feed -->
+            <div class="post">
+                <div class="post-header">
+                    <img src="https://via.placeholder.com/40" alt="User Avatar" class="post-avatar">
+                    <div class="post-info">
+                        <div class="post-author">John Doe</div>
+                        <div class="post-time">2 hours ago</div>
+                    </div>
+                </div>
+                <div class="post-content">
+                    Just completed an amazing course on React! The instructor was fantastic and the projects were challenging but rewarding. Highly recommend! #webdevelopment #react
+                </div>
+                <div class="post-actions">
+                    <div class="post-action">
+                        <i class="far fa-heart"></i>
+                        <span>Like</span>
+                    </div>
+                    <div class="post-action">
+                        <i class="far fa-comment"></i>
+                        <span>Comment</span>
+                    </div>
+                    <div class="post-action">
+                        <i class="fas fa-share"></i>
+                        <span>Share</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Sidebar -->
+        <div class="community-sidebar">
+            <h3>Trending Topics</h3>
+            <div class="trending-topics">
+                <div class="topic-item">
+                    <div class="topic-tag">#webdevelopment</div>
+                    <div class="topic-stats">1.2k posts • 5.3k followers</div>
+                </div>
+                <div class="topic-item">
+                    <div class="topic-tag">#datascience</div>
+                    <div class="topic-stats">980 posts • 4.1k followers</div>
+                </div>
+                <div class="topic-item">
+                    <div class="topic-tag">#careeradvice</div>
+                    <div class="topic-stats">850 posts • 3.8k followers</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Add interactivity for posts
+        document.querySelectorAll('.post-action').forEach(action => {
+            action.addEventListener('click', function() {
+                const icon = this.querySelector('i');
+                if (icon.classList.contains('far')) {
+                    icon.classList.remove('far');
+                    icon.classList.add('fas');
+                    icon.style.color = 'var(--primary-color)';
+                } else {
+                    icon.classList.remove('fas');
+                    icon.classList.add('far');
+                    icon.style.color = '';
+                }
+            });
+        });
+    </script>
+</body>
+</html> 

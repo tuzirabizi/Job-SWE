@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile - Crimble</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2e7d32;
+            --secondary-color: #43a047;
+            --text-color: #333;
+            --light-gray: #f8f9fa;
+            --border-color: #e0e0e0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            min-height: 100vh;
+        }
+
+        .header {
+            background-color: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: var(--primary-color);
+        }
+
+        .logo img {
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        .logo span {
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        .profile-container {
+            max-width: 1200px;
+            margin: 90px auto 40px;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 30px;
+        }
+
+        .profile-sidebar {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            height: fit-content;
+        }
+
+        .profile-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .profile-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            margin: 0 auto 15px;
+            object-fit: cover;
+            border: 3px solid var(--primary-color);
+        }
+
+        .profile-name {
+            font-size: 20px;
+            margin-bottom: 5px;
+        }
+
+        .profile-title {
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .profile-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 10px;
+            background: var(--light-gray);
+            border-radius: 5px;
+        }
+
+        .stat-value {
+            font-size: 18px;
+            font-weight: 500;
+            color: var(--primary-color);
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: #666;
+        }
+
+        .profile-menu {
+            list-style: none;
+        }
+
+        .profile-menu li {
+            margin-bottom: 10px;
+        }
+
+        .profile-menu a {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            color: var(--text-color);
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .profile-menu a:hover {
+            background-color: var(--light-gray);
+        }
+
+        .profile-menu a.active {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .profile-menu i {
+            margin-right: 10px;
+            width: 20px;
+        }
+
+        .profile-content {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .content-section {
+            margin-bottom: 30px;
+        }
+
+        .section-title {
+            font-size: 20px;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--light-gray);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .form-group textarea {
+            height: 100px;
+            resize: vertical;
+        }
+
+        .btn-save {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-save:hover {
+            background-color: var(--secondary-color);
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 10px;
+        }
+
+        .skill-item {
+            background: var(--light-gray);
+            padding: 10px;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .skill-item button {
+            background: none;
+            border: none;
+            color: #666;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        .skill-item button:hover {
+            color: var(--primary-color);
+        }
+
+        @media (max-width: 768px) {
+            .profile-container {
+                grid-template-columns: 1fr;
+            }
+
+            .profile-sidebar {
+                position: sticky;
+                top: 90px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <a href="/" class="logo">
+                <img src="https://via.placeholder.com/40" alt="Crimble Logo">
+                <span>Crimble</span>
+            </a>
+        </div>
+    </header>
+
+    <!-- Profile Container -->
+    <div class="profile-container">
+        <!-- Profile Sidebar -->
+        <div class="profile-sidebar">
+            <div class="profile-header">
+                <img src="https://via.placeholder.com/120" alt="Profile Avatar" class="profile-avatar">
+                <h2 class="profile-name">John Doe</h2>
+                <div class="profile-title">Senior Software Engineer</div>
+                <div class="profile-stats">
+                    <div class="stat-item">
+                        <div class="stat-value">12</div>
+                        <div class="stat-label">Applications</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">5</div>
+                        <div class="stat-label">Interviews</div>
+                    </div>
+                </div>
+            </div>
+            <ul class="profile-menu">
+                <li>
+                    <a href="#profile" class="active">
+                        <i class="fas fa-user"></i>
+                        Profile
+                    </a>
+                </li>
+                <li>
+                    <a href="#applications">
+                        <i class="fas fa-briefcase"></i>
+                        Applications
+                    </a>
+                </li>
+                <li>
+                    <a href="#skills">
+                        <i class="fas fa-code"></i>
+                        Skills
+                    </a>
+                </li>
+                <li>
+                    <a href="#education">
+                        <i class="fas fa-graduation-cap"></i>
+                        Education
+                    </a>
+                </li>
+                <li>
+                    <a href="#experience">
+                        <i class="fas fa-history"></i>
+                        Experience
+                    </a>
+                </li>
+                <li>
+                    <a href="#settings">
+                        <i class="fas fa-cog"></i>
+                        Settings
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Profile Content -->
+        <div class="profile-content">
+            <!-- Profile Information -->
+            <div class="content-section" id="profile">
+                <h3 class="section-title">Profile Information</h3>
+                <form>
+                    <div class="form-group">
+                        <label for="fullName">Full Name</label>
+                        <input type="text" id="fullName" value="John Doe">
+                    </div>
+                    <div class="form-group">
+                        <label for="title">Professional Title</label>
+                        <input type="text" id="title" value="Senior Software Engineer">
+                    </div>
+                    <div class="form-group">
+                        <label for="location">Location</label>
+                        <input type="text" id="location" value="San Francisco, CA">
+                    </div>
+                    <div class="form-group">
+                        <label for="bio">Bio</label>
+                        <textarea id="bio">Experienced software engineer with expertise in full-stack development and cloud technologies.</textarea>
+                    </div>
+                    <button type="submit" class="btn-save">Save Changes</button>
+                </form>
+            </div>
+
+            <!-- Skills Section -->
+            <div class="content-section" id="skills">
+                <h3 class="section-title">Skills</h3>
+                <div class="skills-grid">
+                    <div class="skill-item">
+                        <span>JavaScript</span>
+                        <button><i class="fas fa-times"></i></button>
+                    </div>
+                    <div class="skill-item">
+                        <span>React</span>
+                        <button><i class="fas fa-times"></i></button>
+                    </div>
+                    <div class="skill-item">
+                        <span>Node.js</span>
+                        <button><i class="fas fa-times"></i></button>
+                    </div>
+                    <div class="skill-item">
+                        <span>Python</span>
+                        <button><i class="fas fa-times"></i></button>
+                    </div>
+                    <div class="skill-item">
+                        <span>AWS</span>
+                        <button><i class="fas fa-times"></i></button>
+                    </div>
+                    <div class="skill-item">
+                        <span>Docker</span>
+                        <button><i class="fas fa-times"></i></button>
+                    </div>
+                </div>
+                <button class="btn-save" style="margin-top: 20px;">Add New Skill</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Profile menu navigation
+        const menuLinks = document.querySelectorAll('.profile-menu a');
+        menuLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                menuLinks.forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        // Form submission
+        const profileForm = document.querySelector('form');
+        profileForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            // Add your profile update logic here
+            console.log('Profile update:', {
+                fullName: document.getElementById('fullName').value,
+                title: document.getElementById('title').value,
+                location: document.getElementById('location').value,
+                bio: document.getElementById('bio').value
+            });
+        });
+
+        // Skill removal
+        const skillButtons = document.querySelectorAll('.skill-item button');
+        skillButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                this.closest('.skill-item').remove();
+            });
+        });
+    </script>
+</body>
+</html> 

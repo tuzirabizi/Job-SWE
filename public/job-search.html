@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Search - Crimble</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2e7d32;
+            --secondary-color: #43a047;
+            --text-color: #333;
+            --light-gray: #f8f9fa;
+            --border-color: #e0e0e0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            min-height: 100vh;
+        }
+
+        .header {
+            background-color: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: var(--primary-color);
+        }
+
+        .logo img {
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        .logo span {
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        .search-container {
+            max-width: 1200px;
+            margin: 90px auto 40px;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 30px;
+        }
+
+        .filters {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            height: fit-content;
+        }
+
+        .filter-section {
+            margin-bottom: 20px;
+        }
+
+        .filter-section h3 {
+            font-size: 16px;
+            margin-bottom: 15px;
+            color: var(--text-color);
+        }
+
+        .filter-options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .filter-option {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .filter-option input[type="checkbox"] {
+            width: 16px;
+            height: 16px;
+        }
+
+        .filter-option label {
+            font-size: 14px;
+            color: #666;
+        }
+
+        .search-results {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .search-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid var(--light-gray);
+        }
+
+        .search-stats {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .sort-options {
+            display: flex;
+            gap: 10px;
+        }
+
+        .sort-btn {
+            padding: 8px 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            background: white;
+            color: #666;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .sort-btn:hover {
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        .sort-btn.active {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+
+        .job-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .job-card {
+            display: flex;
+            align-items: flex-start;
+            padding: 20px;
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .job-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .company-logo {
+            width: 60px;
+            height: 60px;
+            border-radius: 8px;
+            margin-right: 20px;
+        }
+
+        .job-info {
+            flex: 1;
+        }
+
+        .job-title {
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+
+        .company-name {
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        .job-meta {
+            display: flex;
+            gap: 20px;
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        .job-meta span {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .job-tags {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .job-tag {
+            background: var(--light-gray);
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+            color: var(--primary-color);
+        }
+
+        .job-salary {
+            color: var(--primary-color);
+            font-weight: 500;
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 30px;
+        }
+
+        .page-btn {
+            padding: 8px 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            background: white;
+            color: #666;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .page-btn:hover {
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        .page-btn.active {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+
+        @media (max-width: 768px) {
+            .search-container {
+                grid-template-columns: 1fr;
+            }
+
+            .filters {
+                position: sticky;
+                top: 90px;
+            }
+
+            .job-card {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+
+            .company-logo {
+                margin-right: 0;
+                margin-bottom: 15px;
+            }
+
+            .job-meta {
+                flex-direction: column;
+                gap: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <a href="/" class="logo">
+                <img src="https://via.placeholder.com/40" alt="Crimble Logo">
+                <span>Crimble</span>
+            </a>
+        </div>
+    </header>
+
+    <!-- Search Container -->
+    <div class="search-container">
+        <!-- Filters -->
+        <div class="filters">
+            <div class="filter-section">
+                <h3>Job Type</h3>
+                <div class="filter-options">
+                    <div class="filter-option">
+                        <input type="checkbox" id="full-time">
+                        <label for="full-time">Full Time</label>
+                    </div>
+                    <div class="filter-option">
+                        <input type="checkbox" id="part-time">
+                        <label for="part-time">Part Time</label>
+                    </div>
+                    <div class="filter-option">
+                        <input type="checkbox" id="contract">
+                        <label for="contract">Contract</label>
+                    </div>
+                    <div class="filter-option">
+                        <input type="checkbox" id="internship">
+                        <label for="internship">Internship</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="filter-section">
+                <h3>Experience Level</h3>
+                <div class="filter-options">
+                    <div class="filter-option">
+                        <input type="checkbox" id="entry">
+                        <label for="entry">Entry Level</label>
+                    </div>
+                    <div class="filter-option">
+                        <input type="checkbox" id="mid">
+                        <label for="mid">Mid Level</label>
+                    </div>
+                    <div class="filter-option">
+                        <input type="checkbox" id="senior">
+                        <label for="senior">Senior Level</label>
+                    </div>
+                    <div class="filter-option">
+                        <input type="checkbox" id="lead">
+                        <label for="lead">Lead</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="filter-section">
+                <h3>Salary Range</h3>
+                <div class="filter-options">
+                    <div class="filter-option">
+                        <input type="checkbox" id="salary-1">
+                        <label for="salary-1">$0 - $50,000</label>
+                    </div>
+                    <div class="filter-option">
+                        <input type="checkbox" id="salary-2">
+                        <label for="salary-2">$50,000 - $100,000</label>
+                    </div>
+                    <div class="filter-option">
+                        <input type="checkbox" id="salary-3">
+                        <label for="salary-3">$100,000 - $150,000</label>
+                    </div>
+                    <div class="filter-option">
+                        <input type="checkbox" id="salary-4">
+                        <label for="salary-4">$150,000+</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Search Results -->
+        <div class="search-results">
+            <div class="search-header">
+                <div class="search-stats">Showing 1-10 of 150 jobs</div>
+                <div class="sort-options">
+                    <button class="sort-btn active">Most Recent</button>
+                    <button class="sort-btn">Salary: High to Low</button>
+                    <button class="sort-btn">Salary: Low to High</button>
+                </div>
+            </div>
+
+            <div class="job-list">
+                <!-- Job Card 1 -->
+                <div class="job-card">
+                    <img src="https://via.placeholder.com/60" alt="Company Logo" class="company-logo">
+                    <div class="job-info">
+                        <h3 class="job-title">Senior Software Engineer</h3>
+                        <div class="company-name">Tech Corp</div>
+                        <div class="job-meta">
+                            <span><i class="fas fa-map-marker-alt"></i> San Francisco, CA</span>
+                            <span><i class="fas fa-clock"></i> Full-time</span>
+                            <span><i class="fas fa-briefcase"></i> 5+ years</span>
+                        </div>
+                        <div class="job-tags">
+                            <span class="job-tag">JavaScript</span>
+                            <span class="job-tag">React</span>
+                            <span class="job-tag">Node.js</span>
+                            <span class="job-tag">AWS</span>
+                        </div>
+                        <div class="job-salary">$120,000 - $150,000</div>
+                    </div>
+                </div>
+
+                <!-- Job Card 2 -->
+                <div class="job-card">
+                    <img src="https://via.placeholder.com/60" alt="Company Logo" class="company-logo">
+                    <div class="job-info">
+                        <h3 class="job-title">Full Stack Developer</h3>
+                        <div class="company-name">Digital Solutions Inc.</div>
+                        <div class="job-meta">
+                            <span><i class="fas fa-map-marker-alt"></i> New York, NY</span>
+                            <span><i class="fas fa-clock"></i> Full-time</span>
+                            <span><i class="fas fa-briefcase"></i> 3+ years</span>
+                        </div>
+                        <div class="job-tags">
+                            <span class="job-tag">Python</span>
+                            <span class="job-tag">Django</span>
+                            <span class="job-tag">React</span>
+                            <span class="job-tag">PostgreSQL</span>
+                        </div>
+                        <div class="job-salary">$100,000 - $130,000</div>
+                    </div>
+                </div>
+
+                <!-- Job Card 3 -->
+                <div class="job-card">
+                    <img src="https://via.placeholder.com/60" alt="Company Logo" class="company-logo">
+                    <div class="job-info">
+                        <h3 class="job-title">Frontend Developer</h3>
+                        <div class="company-name">Web Solutions</div>
+                        <div class="job-meta">
+                            <span><i class="fas fa-map-marker-alt"></i> Remote</span>
+                            <span><i class="fas fa-clock"></i> Full-time</span>
+                            <span><i class="fas fa-briefcase"></i> 2+ years</span>
+                        </div>
+                        <div class="job-tags">
+                            <span class="job-tag">HTML</span>
+                            <span class="job-tag">CSS</span>
+                            <span class="job-tag">JavaScript</span>
+                            <span class="job-tag">Vue.js</span>
+                        </div>
+                        <div class="job-salary">$90,000 - $120,000</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pagination -->
+            <div class="pagination">
+                <button class="page-btn">Previous</button>
+                <button class="page-btn active">1</button>
+                <button class="page-btn">2</button>
+                <button class="page-btn">3</button>
+                <button class="page-btn">4</button>
+                <button class="page-btn">5</button>
+                <button class="page-btn">Next</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Sort buttons functionality
+        const sortButtons = document.querySelectorAll('.sort-btn');
+        sortButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                sortButtons.forEach(btn => btn.classList.remove('active'));
+                this.classList.add('active');
+                // Add your sorting logic here
+                console.log('Sort by:', this.textContent);
+            });
+        });
+
+        // Job card click functionality
+        const jobCards = document.querySelectorAll('.job-card');
+        jobCards.forEach(card => {
+            card.addEventListener('click', function() {
+                // Add your navigation logic here
+                console.log('Job card clicked');
+            });
+        });
+
+        // Filter checkbox functionality
+        const filterCheckboxes = document.querySelectorAll('.filter-option input');
+        filterCheckboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', function() {
+                // Add your filter logic here
+                console.log('Filter changed:', this.id);
+            });
+        });
+
+        // Pagination functionality
+        const pageButtons = document.querySelectorAll('.page-btn');
+        pageButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                if (this.textContent !== 'Previous' && this.textContent !== 'Next') {
+                    pageButtons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                    // Add your pagination logic here
+                    console.log('Page changed to:', this.textContent);
+                }
+            });
+        });
+    </script>
+</body>
+</html> 

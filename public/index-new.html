@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crimble - Professional Growth Platform</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2e7d32;
+            --secondary-color: #43a047;
+            --dark-color: #000000;
+            --light-color: #ffffff;
+            --text-color: #333333;
+            --border-color: #e0e0e0;
+            --background-color: #f4f6f8;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+        }
+
+        .header {
+            background: var(--dark-color);
+            padding: 15px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: var(--light-color);
+        }
+
+        .logo img {
+            width: 40px;
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: var(--light-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .auth-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--light-color);
+            color: var(--light-color);
+        }
+
+        .btn-primary {
+            background: var(--primary-color);
+            color: var(--light-color);
+        }
+
+        .btn-primary:hover {
+            background: var(--secondary-color);
+        }
+
+        .hero-section {
+            background: linear-gradient(135deg, var(--dark-color), #1a1a1a);
+            color: var(--light-color);
+            padding: 120px 20px 60px;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .hero-section h1 {
+            font-size: 3.5em;
+            margin-bottom: 20px;
+            background: linear-gradient(90deg, var(--light-color), var(--primary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-section p {
+            font-size: 1.2em;
+            margin-bottom: 30px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .search-container {
+            max-width: 600px;
+            margin: 0 auto 40px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .search-container input {
+            flex: 1;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1em;
+        }
+
+        .platform-stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+        }
+
+        .stat-card h3 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            color: var(--primary-color);
+        }
+
+        .stat-card p {
+            font-size: 1em;
+            margin: 0;
+        }
+
+        .features-section {
+            padding: 80px 20px;
+            background: var(--background-color);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .section-title h2 {
+            font-size: 2.5em;
+            color: var(--dark-color);
+            margin-bottom: 15px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .feature-card {
+            background: var(--light-color);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-card i {
+            font-size: 2.5em;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+
+        .feature-card h3 {
+            color: var(--dark-color);
+            margin-bottom: 15px;
+        }
+
+        .feature-card p {
+            color: var(--text-color);
+        }
+
+        .testimonials-section {
+            padding: 80px 20px;
+            background: var(--light-color);
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .testimonial-card {
+            background: var(--background-color);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .testimonial-card img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            margin-bottom: 15px;
+        }
+
+        .testimonial-card h4 {
+            color: var(--dark-color);
+            margin-bottom: 10px;
+        }
+
+        .partners-section {
+            padding: 80px 20px;
+            background: var(--background-color);
+            text-align: center;
+        }
+
+        .partners-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 30px;
+            max-width: 1200px;
+            margin: 40px auto;
+        }
+
+        .partner-logo {
+            height: 60px;
+            object-fit: contain;
+            filter: grayscale(100%);
+            transition: filter 0.3s ease;
+        }
+
+        .partner-logo:hover {
+            filter: grayscale(0%);
+        }
+
+        @media (max-width: 1024px) {
+            .platform-stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .features-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .testimonials-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .partners-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .platform-stats {
+                grid-template-columns: 1fr;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .partners-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .nav-links {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <a href="/" class="logo">
+                <img src="https://via.placeholder.com/40" alt="Crimble Logo">
+                <span>Crimble</span>
+            </a>
+            <nav class="nav-links">
+                <a href="/courses.html">Courses</a>
+                <a href="/jobs.html">Jobs</a>
+                <a href="/talents.html">Talents</a>
+                <a href="/community.html">Community</a>
+                <a href="/about.html">About Us</a>
+            </nav>
+            <div class="auth-buttons">
+                <button class="btn btn-outline" onclick="showLoginModal()">Log in</button>
+                <button class="btn btn-primary" onclick="showSignupModal()">Sign up</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="hero-content">
+            <h1>Transform Your Career with Crimble</h1>
+            <p>Join a thriving community of professionals, access expert-led courses, and connect with top employers worldwide. Your journey to success starts here.</p>
+            <div class="search-container">
+                <input type="text" placeholder="Search courses, jobs, or talents...">
+                <button class="btn btn-primary">Search</button>
+            </div>
+            <div class="platform-stats">
+                <div class="stat-card">
+                    <h3>10K+</h3>
+                    <p>Active Users</p>
+                </div>
+                <div class="stat-card">
+                    <h3>5K+</h3>
+                    <p>Courses</p>
+                </div>
+                <div class="stat-card">
+                    <h3>2K+</h3>
+                    <p>Jobs Posted</p>
+                </div>
+                <div class="stat-card">
+                    <h3>8K+</h3>
+                    <p>Success Stories</p>
+                </div>
+                <div class="stat-card">
+                    <h3>500+</h3>
+                    <p>Industry Experts</p>
+                </div>
+                <div class="stat-card">
+                    <h3>95%</h3>
+                    <p>Job Placement Rate</p>
+                </div>
+                <div class="stat-card">
+                    <h3>24/7</h3>
+                    <p>Community Support</p>
+                </div>
+                <div class="stat-card">
+                    <h3>50+</h3>
+                    <p>Career Paths</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features-section">
+        <div class="section-title">
+            <h2>Why Choose Crimble?</h2>
+            <p>Discover the features that make us the leading platform for professional growth</p>
+        </div>
+        <div class="features-grid">
+            <div class="feature-card">
+                <i class="fas fa-graduation-cap"></i>
+                <h3>Comprehensive Learning</h3>
+                <p>Access high-quality courses from industry experts, covering everything from technical skills to soft skills. Learn at your own pace with our flexible learning paths.</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-briefcase"></i>
+                <h3>Career Opportunities</h3>
+                <p>Connect with top employers and find your dream job. Our advanced matching algorithm helps you discover roles that align with your skills and career goals.</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-users"></i>
+                <h3>Professional Network</h3>
+                <p>Build meaningful connections with professionals in your field. Join industry-specific groups, participate in discussions, and expand your professional network.</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-chart-line"></i>
+                <h3>Skill Development</h3>
+                <p>Track your progress and get certified in various domains. Our skill assessment tools help you identify areas for improvement and measure your growth.</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-comments"></i>
+                <h3>Community Support</h3>
+                <p>Engage with like-minded professionals and share knowledge. Get answers to your questions, share experiences, and learn from others in our active community.</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-rocket"></i>
+                <h3>Career Growth</h3>
+                <p>Get personalized recommendations for career advancement. Our AI-powered system suggests courses, jobs, and networking opportunities based on your profile.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials-section">
+        <div class="section-title">
+            <h2>Success Stories</h2>
+            <p>Hear from our community members about their journey with Crimble</p>
+        </div>
+        <div class="testimonials-grid">
+            <div class="testimonial-card">
+                <img src="https://via.placeholder.com/60" alt="User">
+                <h4>Sarah Johnson</h4>
+                <p>"Crimble helped me land my dream job in web development. The courses were comprehensive and the community support was amazing! I went from a junior developer to a senior role in just 18 months."</p>
+            </div>
+            <div class="testimonial-card">
+                <img src="https://via.placeholder.com/60" alt="User">
+                <h4>Michael Chen</h4>
+                <p>"The platform's job matching algorithm is spot-on. I found the perfect role that matched my skills and career goals. The interview preparation resources were invaluable in helping me secure the position."</p>
+            </div>
+            <div class="testimonial-card">
+                <img src="https://via.placeholder.com/60" alt="User">
+                <h4>Emily Rodriguez</h4>
+                <p>"As a course creator, Crimble has given me the tools and audience to share my knowledge and grow my business. The platform's analytics helped me understand my students' needs better."</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Partners Section -->
+    <section class="partners-section">
+        <div class="section-title">
+            <h2>Trusted by Leading Companies</h2>
+            <p>Join our network of industry leaders and innovators</p>
+        </div>
+        <div class="partners-grid">
+            <img src="https://via.placeholder.com/150x60" alt="Partner Logo" class="partner-logo">
+            <img src="https://via.placeholder.com/150x60" alt="Partner Logo" class="partner-logo">
+            <img src="https://via.placeholder.com/150x60" alt="Partner Logo" class="partner-logo">
+            <img src="https://via.placeholder.com/150x60" alt="Partner Logo" class="partner-logo">
+            <img src="https://via.placeholder.com/150x60" alt="Partner Logo" class="partner-logo">
+        </div>
+    </section>
+
+    <script>
+        function showLoginModal() {
+            // Implementation for login modal
+        }
+
+        function showSignupModal() {
+            // Implementation for signup modal
+        }
+    </script>
+</body>
+</html> 
